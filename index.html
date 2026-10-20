@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="de"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Origen · Programm Mind-Map</title>
+<style>
+:root{
+  --bg:#fbfaf8; --panel:#fff; --ink:#1d1b19; --mute:#7a736d; --faint:#a8a19b;
+  --line:#e6e2dc; --line2:#d3ccc4; --fill:#f1eeea; --accent:#7a2e26;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif}
+h1,h2,h3{font-weight:600;letter-spacing:-.01em}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=text],input[type=date],select,textarea{background:var(--panel);
+  border:1px solid var(--line2);border-radius:5px;padding:5px 8px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink)}
+button{background:none;border:1px solid var(--line2);border-radius:5px;padding:5px 10px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+button.link{border:0;padding:3px 5px;color:var(--mute)}
+button.link:hover{color:var(--ink);background:var(--fill)}
+
+header{border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0;z-index:20}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.top{display:flex;align-items:center;gap:16px;padding:16px 0 12px}
+.top h1{font-size:16px;margin:0}
+.top .sub{font-size:12.5px;color:var(--faint)}
+.top .sp{margin-left:auto;display:flex;gap:6px;align-items:center}
+nav{display:flex;gap:18px;overflow-x:auto}
+nav button{border:0;border-radius:0;padding:0 0 10px;color:var(--mute);white-space:nowrap;
+  border-bottom:1.5px solid transparent}
+nav button:hover{color:var(--ink)}
+nav button.on{color:var(--ink);border-bottom-color:var(--ink);background:none}
+nav .n{color:var(--faint);font-size:11.5px;margin-left:4px}
+
+main{max-width:1180px;margin:0 auto;padding:24px 24px 80px}
+section{display:none} section.on{display:block}
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.bar label{font-size:12.5px;color:var(--mute);display:flex;gap:5px;align-items:center}
+.note{font-size:12.5px;color:var(--faint);margin:0 0 20px}
+
+/* --- cards --- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line)}
+.card{background:var(--panel);padding:18px;position:relative}
+.card.flash{background:#fdf8ec}
+.card h3{margin:0 0 4px;font-size:15px;line-height:1.35;padding-right:20px}
+.card .kind{font-size:11.5px;color:var(--faint);margin-bottom:9px}
+.tlink{cursor:pointer;border-bottom:1px dotted var(--line2)}
+.tlink:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.card p{margin:0 0 13px;font-size:13.5px;color:#443e39}
+.row{margin-bottom:6px}
+.lab{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);
+  margin:0 0 5px}
+.del{position:absolute;top:12px;right:12px;opacity:0}
+.card:hover .del,details:hover .del{opacity:1}
+
+/* --- zwei Chip-Typen --- */
+.fmt{display:inline-block;font-size:11.5px;padding:3px 8px;border-radius:3px;background:var(--fill);
+  color:#524b45;margin:0 4px 4px 0;cursor:pointer}
+.fmt:hover{background:var(--line2)}
+.per{display:inline-block;font-size:12.5px;padding:3px 11px;border-radius:99px;
+  border:1px solid var(--line2);background:var(--panel);color:var(--ink);margin:0 4px 4px 0;cursor:pointer}
+.per:hover{border-color:var(--ink)}
+.per.ext{border-style:dashed}
+.per .e{color:var(--faint);font-size:11px;margin-left:5px}
+.per.sel{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.per.sel .e{color:var(--line2)}
+
+/* --- listen --- */
+details.item{border-bottom:1px solid var(--line);position:relative}
+details.item>summary{cursor:pointer;padding:11px 2px;list-style:none;display:flex;
+  align-items:baseline;gap:10px}
+details.item>summary::-webkit-details-marker{display:none}
+details.item.flash{background:#fdf8ec}
+.nm{font-weight:500}
+.dash{width:14px;border-top:1px dashed var(--line2);align-self:center}
+.rt{margin-left:auto;font-size:11.5px;color:var(--faint);white-space:nowrap}
+.body{padding:0 2px 18px 0;max-width:760px}
+.body p{margin:0 0 14px;font-size:13.5px;color:#443e39}
+.grouphead{margin:30px 0 2px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--faint);border-bottom:1px solid var(--line2);padding-bottom:6px}
+
+table.sheet{width:100%;border-collapse:collapse;font-size:13.5px}
+table.sheet th{text-align:left;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--faint);padding:0 12px 7px 0;border-bottom:1px solid var(--line2);font-weight:500}
+table.sheet td{padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+[contenteditable=true]{outline:none;background:#fdfaf1;box-shadow:inset 0 -1px 0 var(--line2);
+  border-radius:2px}
+[contenteditable=true]:focus{background:#fff;box-shadow:inset 0 -1px 0 var(--ink)}
+
+/* --- programm --- */
+.prog{border-bottom:1px solid var(--line);padding:20px 0;display:grid;
+  grid-template-columns:30px 1fr;gap:14px}
+.pn{font-size:12.5px;color:var(--faint);padding-top:2px}
+.stats{display:flex;gap:34px;flex-wrap:wrap;padding:4px 0 22px;border-bottom:1px solid var(--line);
+  margin-bottom:8px}
+.stat .big{font-size:22px;font-weight:600}
+.stat .lbl{font-size:11.5px;color:var(--faint)}
+.picker{max-height:220px;overflow:auto;border:1px solid var(--line);padding:10px;margin-top:8px;
+  columns:2;column-gap:22px}
+.picker label{display:block;font-size:13px;padding:1px 0;cursor:pointer;break-inside:avoid}
+.picker .gh{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);
+  margin:10px 0 3px;break-inside:avoid}
+/* --- Formular --- */
+.form{border:1px solid var(--ink);padding:20px;margin-bottom:22px;background:var(--panel)}
+.form h3{margin:0 0 18px;font-size:14px}
+.frow{margin-bottom:16px}
+.frow>label{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--faint);margin-bottom:5px}
+.frow>label .cnt{color:var(--ink);letter-spacing:0;text-transform:none;font-size:11.5px}
+.frow input[type=text],.frow textarea,.frow select{width:100%;max-width:620px}
+.frow textarea{min-height:70px;resize:vertical}
+.chosen{margin-bottom:7px;min-height:1px}
+.fbtns{display:flex;gap:8px;padding-top:6px;border-top:1px solid var(--line);margin-top:20px}
+.pfilter{margin-bottom:6px;width:220px!important}
+.status{font-size:11.5px;color:var(--faint);white-space:nowrap}
+.status.warn{color:#8a5a1a}
+summary.more{font-size:12.5px;color:var(--mute);cursor:pointer;margin-top:8px;list-style:none}
+summary.more::-webkit-details-marker{display:none}
+summary.more:hover{color:var(--ink)}
+.empty{color:var(--faint);padding:60px 0;text-align:center}
+.doc h2{font-size:14px;margin:38px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--ink);
+  letter-spacing:.02em}
+.doc h2:first-child{margin-top:0}
+@media print{
+  header,.bar,.del,button,summary.more{display:none!important}
+  body{background:#fff} section{display:none} section.on{display:block}
+  main{padding:0;max-width:none}
+  .card,.prog,tr,details{break-inside:avoid}
+}
+
+.topic-notes{margin-top:10px}
+.topic-notes summary{cursor:pointer;font-size:12.5px;color:var(--mute)}
+.topic-notes textarea{width:100%;min-height:80px;resize:vertical;margin-top:8px}
+.drag-handle{cursor:grab;color:var(--faint);padding:2px 6px;touch-action:none}
+.drag-handle:active{cursor:grabbing}
+.drop-before{box-shadow:inset 0 3px var(--accent)}
+.drop-after{box-shadow:inset 0 -3px var(--accent)}
+.dragging{opacity:.45}
+@media print{.drag-handle{display:none!important}}
+.text-url{color:var(--accent);text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}
+.text-url:hover{color:var(--ink)}
+.url-preview{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;margin:6px 0 12px;color:var(--mute)}
+.url-preview:empty{display:none}
+.prog.flash{background:#fdf8ec}
+input[type=time]{background:var(--panel);border:1px solid var(--line2);border-radius:5px;padding:5px 8px}
+
+/* --- kalender, aufgebaut wie Google Kalender --- */
+.gc-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.gc-top h2{font-size:20px;font-weight:500;margin:0 auto 0 8px}
+.gc-top .icon{border:0;font-size:20px;line-height:1;width:34px;height:34px;padding:0;border-radius:50%}
+.gc-top .icon:hover{background:var(--fill)}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:6px;overflow:hidden}
+.seg button{border:0;border-radius:0;padding:5px 14px}
+.seg button+button{border-left:1px solid var(--line2)}
+.gc-body{display:grid;grid-template-columns:232px minmax(0,1fr);gap:22px;align-items:start}
+@media(max-width:860px){.gc-body{grid-template-columns:minmax(0,1fr)} .gc-side{order:2}}
+.gc-side .create{padding:10px 20px;border-radius:99px;border-color:var(--line);background:var(--panel);
+  box-shadow:0 1px 3px rgba(0,0,0,.14);font-weight:500;margin-bottom:18px}
+.gc-side .create:hover{box-shadow:0 2px 6px rgba(0,0,0,.18)}
+.mini{margin-bottom:22px}
+.mini-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.mini-h b{font-weight:500;font-size:13px}
+.mini-h button{border:0;padding:0 7px;border-radius:50%}
+.mini-g{display:grid;grid-template-columns:repeat(7,1fr);text-align:center}
+.mini-g span{color:var(--faint);font-size:10px;padding:3px 0}
+.mini-g button{border:0;border-radius:50%;padding:0;width:27px;height:27px;margin:1px auto;
+  font-size:11.5px;position:relative}
+.mini-g button:hover{background:var(--fill)}
+.mini-g button.out{color:var(--faint)}
+.mini-g button.wk{background:var(--fill)}
+.mini-g button.sel{background:var(--line2)}
+.mini-g button.today{background:var(--accent);color:#fff}
+.mini-g button.has::after{content:'';position:absolute;bottom:3px;left:50%;width:3px;height:3px;
+  margin-left:-1.5px;border-radius:50%;background:currentColor;opacity:.55}
+
+.ev{display:block;font-size:12px;line-height:1.35;padding:2px 7px;margin-bottom:2px;border-radius:4px;
+  background:var(--c,var(--ink));color:#fff;cursor:pointer;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;user-select:none;touch-action:none}
+.ev.dot{background:none;color:var(--ink)}
+.ev.dot::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:var(--c);margin-right:6px;vertical-align:0}
+.ev.dot:hover{background:var(--fill)}
+.ev.t{background:var(--fill);color:#524b45}
+.ev .tm{opacity:.75;margin-right:5px;font-variant-numeric:tabular-nums}
+.ev:focus-visible,.blk:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+.pool{border:1px dashed var(--line2);padding:6px;min-height:46px;border-radius:6px}
+.pool.themes{max-height:300px;overflow:auto;border:1px solid var(--line)}
+.over{background:#fdf8ec!important;box-shadow:inset 0 0 0 1.5px var(--accent)}
+.legend{display:flex;gap:5px;flex-wrap:wrap;margin-top:18px}
+.legend .ev{display:inline-block;cursor:default}
+.ghost{position:fixed;z-index:100;pointer-events:none;max-width:220px;box-shadow:0 4px 14px rgba(0,0,0,.22)}
+body.cal-dragging,body.cal-dragging *{cursor:grabbing!important;user-select:none}
+
+/* Zeitraster für Tag und Woche */
+.tg{border:1px solid var(--line);background:var(--panel);border-radius:6px;overflow:hidden}
+.tg-row{display:grid;grid-template-columns:56px repeat(var(--n),minmax(0,1fr))}
+.tg-dh{text-align:center;padding:8px 0 6px}
+.tg-dh .dw{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.tg-dh .dnum{border:0;font-size:22px;width:42px;height:42px;padding:0;border-radius:50%;line-height:1}
+.tg-dh .dnum:hover{background:var(--fill)}
+.tg-dh.today .dw{color:var(--accent)}
+.tg-dh.today .dnum{background:var(--accent);color:#fff}
+.gut{font-size:10px;color:var(--faint);text-align:right;padding-right:8px}
+.tg-head .gut{align-self:end;padding-bottom:8px}
+.tg-all{border-bottom:1px solid var(--line2)}
+.tg-all .gut{padding-top:7px}
+.ad-cell{border-left:1px solid var(--line);padding:3px 3px 4px;min-height:30px;min-width:0}
+.tg-scroll{height:min(660px,calc(100vh - 280px));min-height:360px;overflow-y:auto}
+.hours{position:relative}
+.hours span{position:absolute;right:8px;transform:translateY(-50%)}
+.tg-col{position:relative;min-width:0;border-left:1px solid var(--line);
+  background-image:linear-gradient(var(--line) 1px,transparent 1px);background-size:100% 48px}
+.tg-col.today{background-color:#fdfbf7}
+.blk{position:absolute;border-radius:5px;background:var(--c);color:#fff;font-size:12px;line-height:1.3;
+  padding:3px 6px;overflow:hidden;cursor:pointer;box-shadow:0 0 0 1px var(--panel);user-select:none;
+  touch-action:none;z-index:1}
+.blk .bt{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.blk .bm{opacity:.85;font-variant-numeric:tabular-nums;white-space:nowrap}
+.blk.short{display:flex;gap:6px;align-items:baseline;padding-top:1px}
+.blk.short .bt{flex:0 1 auto;min-width:0}
+.blk.short .bm{flex:1 1 0;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.blk .rz{position:absolute;left:0;right:0;bottom:0;height:8px;cursor:ns-resize}
+.blk.preview{z-index:5;pointer-events:none;opacity:.92;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.dragging{opacity:.35}
+.now{position:absolute;left:-1px;right:0;height:2px;background:#d93025;z-index:3;pointer-events:none}
+.now::before{content:'';position:absolute;left:-6px;top:-5px;width:12px;height:12px;border-radius:50%;
+  background:#d93025}
+
+/* Monat */
+.mg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border:1px solid var(--line);
+  border-radius:6px;overflow:hidden;background:var(--panel)}
+.mg .dow{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);
+  text-align:center;padding:7px 0 2px;border-left:1px solid var(--line)}
+.mday{min-height:120px;padding:3px 4px 6px;border-left:1px solid var(--line);border-top:1px solid var(--line);
+  min-width:0}
+.mg .dow:nth-child(7n+1),.mday:nth-child(7n+1){border-left:0}
+.mday .dn{display:block;margin:0 auto 3px;border:0;font-size:12px;padding:0 6px;height:24px;
+  min-width:24px;border-radius:99px}
+.mday .dn:hover{background:var(--fill)}
+.mday.out .dn{color:var(--faint)}
+.mday.today .dn{background:var(--accent);color:#fff}
+.mday .more{display:block;font-size:11.5px;padding:1px 7px;color:var(--ink);font-weight:500}
+
+dialog.evdlg{border:1px solid var(--line2);border-radius:10px;padding:22px;width:calc(100% - 32px);
+  max-width:460px;background:var(--panel);color:var(--ink);box-shadow:0 12px 40px rgba(0,0,0,.2)}
+dialog.evdlg::backdrop{background:rgba(29,27,25,.28)}
+dialog.evdlg h3{margin:0 0 4px;font-size:15px}
+dialog.evdlg .frow input,dialog.evdlg .frow textarea{width:100%}
+dialog.evdlg .two{display:flex;gap:10px}
+dialog.evdlg .two .frow{flex:1;min-width:0}
+dialog.evdlg .chk{display:flex;gap:7px;align-items:center;font-size:13px;margin:-6px 0 16px;cursor:pointer}
+.sw{display:flex;gap:9px;flex-wrap:wrap;padding:3px 2px}
+.swl{position:relative}
+.swl input{position:absolute;opacity:0}
+.swl span{display:block;width:22px;height:22px;border-radius:50%;cursor:pointer}
+.swl input:checked+span{box-shadow:0 0 0 2px var(--panel),0 0 0 4px var(--ink)}
+.swl input:focus-visible+span{outline:2px solid var(--ink);outline-offset:3px}
+@media print{.gc-side,.gc-top .seg{display:none} .gc-body{display:block}
+  .tg-scroll{height:auto;overflow:visible}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+ <div class="top">
+  <h1>Origen · Programm Mind-Map</h1>
+  <span class="sub">digitales Bauen</span>
+  <span class="sp">
+   <input type="text" id="q" placeholder="Suchen" style="width:150px">
+   <span class="status" id="status"></span>
+   <button class="link" id="linkbtn" onclick="saveFile()">Speichern</button>
+   <button class="link" onclick="loadFile()">Laden</button>
+   <input type="file" id="imp" accept=".html,.json" style="display:none" onchange="importJSON(this)">
+   <button class="link" onclick="window.print()">Drucken</button>
+  </span>
+ </div>
+ <nav id="tabs"></nav>
+</div></header>
+
+<main>
+ <section id="t-themen"></section>
+ <section id="t-personen"></section>
+ <section id="t-formen"></section>
+ <section id="t-teilnehmende"></section>
+ <section id="t-typen"></section>
+ <section id="t-programm"></section>
+ <section id="t-kalender"></section>
+ <section id="t-gesamt"></section>
+</main>
+<dialog class="evdlg" id="evdlg"></dialog>
+
+<script id="seed" type="application/json">{"personen":[{"name":"Benjamin Dillenburger","gruppe":"Digitales Bauen dbt","extern":false,"beschreibung":"Professor für Digital Building Technologies am ITA der ETH Zürich. Forscht zu grossformatigem 3D-Druck, computergestützter Geometrie und neuen Bauteilen. Entwarf mit Michael Hansmeyer den Weissen Turm (Tor Alva) in Mulegns – das höchste 3D-gedruckte Gebäude der Welt – und zuvor die gedruckten Säulen von Concrete Choreography in den Gärten der Villa Carisch in Riom."},{"name":"Ana Anton","gruppe":"Digitales Bauen dbt","extern":false,"beschreibung":"Postdoktorandin am DBT und im NFS Digitale Fabrikation, wo sie die Forschung zum 3D-Betondruck leitet. Dissertation 2022 «Tectonics of Concrete Printed Architecture»; entwickelte die robotische Extrusion für grossformatige Bauteile, die 2019 bei Concrete Choreography in Riom und später bei Tor Alva zum Einsatz kam. Architekturstudium cum laude an der TU Delft."},{"name":"Matthias Leschok","gruppe":"Digitales Bauen dbt","extern":false,"beschreibung":"Doktorand am DBT. Polymer-3D-Druck für dünne, lichtdurchlässige Bauteile und gedruckte Schalungen – Elemente, die sich zwischen Bühnenbild und Fassade bewegen und für temporäre Bauten interessant sind."},{"name":"Maria Smigielska","gruppe":"Digitales Bauen dbt","extern":false,"beschreibung":"Architektin und Forscherin am DBT. Arbeitet daran, Materialeigenschaften gezielt zu kodieren und zu modulieren – meist über eigens entwickelte, überwiegend robotische Fertigungsverfahren. Von Metallbiegen über Designobjekte bis zu interaktiven Installationen."},{"name":"Angela Yoo","gruppe":"Digitales Bauen dbt","extern":false,"beschreibung":"Wissenschaftliche Mitarbeiterin am DBT, unter anderem in der Lehre (Kurs «Panorama» mit Benjamin Dillenburger und Patrick Bedarf). Additive Fertigung und Materialsysteme für architektonische Bauteile."},{"name":"Tiziano Derme","gruppe":"Digitales Bauen dbt","extern":false,"beschreibung":"Architekt am DBT. Untersucht das Verhältnis von Entwurf, neuen Materialien und Biotechnologie in der digitalen und robotischen Fertigung; publiziert unter anderem zu myzelbasierten Materialien und Hydrogelen – Bauteilen, die man am Ende wieder auflösen kann."},{"name":"Victoria Roznowski","gruppe":"Digitales Bauen dbt","extern":false,"beschreibung":"DBT. Computergestützter Entwurf und digitale Fertigung. Öffentlich noch wenig dokumentiert – Profil bitte selbst ergänzen."},{"name":"Karen A. Antorveza Páez","gruppe":"Digitales Bauen dbt","extern":false,"beschreibung":"Doktorandin am DBT und Tutorin in den Kursen der Professur. Arbeitet an der Schnittstelle von Design, digitaler Fabrikation und Biotechnologie."},{"name":"Nik Eftekhar","gruppe":"Digitales Bauen dbt","extern":false,"beschreibung":"DBT – dein eigenes Profil. Bitte selbst ergänzen."},{"name":"Ariel Lim","gruppe":"Digitales Bauen dbt","extern":false,"beschreibung":"DBT. Digitale Fabrikation und robotische Prozesse. Profil bitte selbst ergänzen."},{"name":"Patrick Bedarf","gruppe":"Digitales Bauen dbt","extern":false,"beschreibung":"Architekt und Senior Lecturer am DBT. Dissertation 2023 «Architected Porosity» zum Mineralschaum-3D-Druck für leichte, dämmende Bauteile. Im Projekt Airlements entstand ein 2 m hohes Wandelement aus vier gedruckten Teilen mit zementfreiem Putz; das Dämmmaterial stammt vom ETH-Spin-off FenX und wird aus recycelten Industrieabfällen hergestellt."},{"name":"Anton Savov","gruppe":"Digitales Bauen dbt","extern":false,"beschreibung":"Architekt und Postdoktorand am DBT bei Benjamin Dillenburger. Entwickelt «architectural machine intelligence» – Werkzeuge, die die gestalterischen Fähigkeiten beim Entwerfen und Bauen erweitern statt sie zu ersetzen."},{"name":"Andrei Jipa","gruppe":"Digitales Bauen dbt","extern":false,"beschreibung":"DBT. 3D-gedruckte Schalungen und Betonbauteile; einer der produktivsten Autoren der Gruppe zu Druckverfahren und Formenbau, unter anderem für Tor Alva. Der richtige Ansprechpartner, wenn es praktisch werden soll."},{"name":"Bernd Bickel","gruppe":"Computer Vision/Graphics CDL","extern":false,"beschreibung":"Professor für Computational Design an der ETH (D-ARCH und D-BAUG), leitet das Computational Design Laboratory. Computergrafik an der Schnittstelle zu Robotik, Computer Vision, Machine Learning, Materialwissenschaft und digitaler Fertigung; Ziel sind Werkzeuge, die physikalische Eigenschaften automatisch optimieren, ohne die gestalterischen Ziele aufzugeben. Zuvor Professor am IST Austria, Doktorat bei Markus Gross an der ETH."},{"name":"Bharath Seshadri","gruppe":"Computer Vision/Graphics CDL","extern":false,"beschreibung":"Postdoktorand am CDL. Bauingenieur mit über zehn Jahren Erfahrung in computergestützten Werkzeugen für Gebäudetechnik und nachhaltige Architektur; Doktorat an der ETH zu thermischen Energiesystemen für robotisch gefertigte Gebäude. Forscht heute zu Computergrafik und Extended Reality für Bauphysik – also daran, Wärmeströme sichtbar zu machen."},{"name":"Desmond Liu","gruppe":"Computer Vision/Graphics CDL","extern":false,"beschreibung":"Zhenyuan «Desmond» Liu, Doktorand am CDL in Computergrafik. Szenenverständnis aus Wärmebildern über inverse Wärmetransportprobleme, mit dem Ziel, thermische Effizienz und Komfort von Gebäuden zu verbessern. Interessiert sich daneben für Maschinenstickerei als Fertigungstechnik."},{"name":"Rafael Bischof","gruppe":"Computer Vision/Graphics CDL","extern":false,"beschreibung":"Doktorand am CDL. Scientific Machine Learning: physikalisches Wissen wird in Lernalgorithmen eingebettet, damit sie in Ingenieuranwendungen zuverlässig bleiben. Schwerpunkt sind neuronale Operatoren zum Lösen von Differentialgleichungen sowie inverses Design unter physikalischen Randbedingungen."},{"name":"Anna Maria Eggler","gruppe":"Computer Vision/Graphics CDL","extern":false,"beschreibung":"Doktorandin am CDL mit Hintergrund in Informatik und Computergrafik. Untersucht, wie computergestützter Entwurf nachhaltigere Fertigung ermöglicht – Schwerpunkt auf weniger Materialverschnitt und Wiederverwendung, an der Schnittstelle von Geometrieverarbeitung und digitaler Fabrikation."},{"name":"Pengbin Tang","gruppe":"Computer Vision/Graphics CDL","extern":false,"beschreibung":"Postdoktorand am CDL, Doktorat in Informatik an der Université de Montréal. Verbindet Computergrafik, Maschinenbau, Materialwissenschaft, Robotik und digitale Fertigung; nutzt physikalische Simulation, Optimierungsverfahren und Machine Learning für den Entwurf von Materialien und Strukturen mit komplexer Form und Funktion."},{"name":"Kenji Tojo","gruppe":"Computer Vision/Graphics CDL","extern":false,"beschreibung":"Postdoktorand am CDL. Computergrafik: neuronale und differenzierbare Verfahren für die Darstellung von Materialien, Erscheinungsbild und Bewegung – die Werkzeuge, mit denen man ein Bauteil realistisch zeigen kann, bevor es existiert."},{"name":"Sophia Kuhn","gruppe":"Computer Vision/Graphics CDL","extern":false,"beschreibung":"Postdoktorandin am CDL. Promovierte bei Walter Kaufmann (Massiv- und Brückenbau), mitbetreut von Fernando Pérez-Cruz und Michael Kraus. Entwickelte mit der SBB ein KI-Modell für Rahmenbrücken – in der Schweiz besonders häufige Eisenbahnbrücken aus Stahlbeton – sowie datengetriebene Verfahren für die Zustandsbeurteilung, die teure Ersatzneubauten alternder Infrastruktur vermeiden sollen."},{"name":"Jeremy Chew","gruppe":"Computer Vision/Graphics CDL","extern":false,"beschreibung":"Doktorand am CDL. Profil öffentlich noch nicht ausgeführt – bitte selbst ergänzen."},{"name":"Silke Langenberg","gruppe":"Heritage","extern":false,"beschreibung":"Professorin für Konstruktionserbe und Denkmalpflege an der ETH, angesiedelt am Institut für Denkmalpflege und Bauforschung und am ITA. Seit ihrer Dissertation über «Bauten der Boomjahre» forscht sie zu Entwicklung, Reparatur und langfristigem Erhalt seriell, industriell und digital produzierter Bauten. Baut mit dem Materialarchiv und weiteren Partnern ein Digitales Konstruktionsarchiv auf – eine offene Forschungsdatenbank als digitales Gedächtnis des Schweizer Bauerbes."},{"name":"Wen-Shan Cui","gruppe":"Heritage","extern":false,"beschreibung":"Doktorandin im Projekt «Digital Construction Archive» an ITA und IDB. Forscht zu Unterhalt, Reparatur und Archivierung digital gefertigter Architektur – also genau der Frage, die sich bei Tor Alva in zwanzig Jahren stellen wird."},{"name":"Dominik Reisach","gruppe":"Heritage","extern":false,"beschreibung":"Doktorand mit Interesse an algorithmischem Entwurf, digitaler Fertigung und traditionellem Handwerk. Entwickelt Entwurfswerkzeuge und Fertigungsprozesse, um Steinabfälle mit unregelmässiger Geometrie für architektonische Oberflächen weiterzuverwenden – naheliegend für einen Kanton voller Steinbrüche."},{"name":"Stefania Rasile","gruppe":"Heritage","extern":false,"beschreibung":"Doktorandin, geführt am Computational Design Laboratory und an der Professur Langenberg. Denkmalpflege und Bauforschung mit computergestützten Methoden."},{"name":"Matthias Brenner","gruppe":"Heritage","extern":false,"beschreibung":"Postdoktorand an der Professur Konstruktionserbe (seit 2025) und Koordinator der MAS- und CAS-Programme. In seiner Dissertation (2020–2025) untersuchte er im Projekt «High-Tech for High-Tech» das Potenzial digitaler Fertigung für die Reparatur der High-Tech-Architektur der 1980er-Jahre – passgenaue Ersatzteile statt Grossersatz, im Rahmen des NFS Digitale Fabrikation. Erste Adresse für MAS-Formate."},{"name":"Christian Schmid","gruppe":"Soziologie","extern":false,"beschreibung":"Soziologe und Stadtforscher an der ETH. Arbeiten zur «planetarischen Urbanisierung», zur gesellschaftlichen Produktion von Raum und zur Frage, wie sich Territorien ausserhalb der Städte verändern. Der Gegenpol, der ein Technologieprogramm davor bewahrt, nur über Maschinen zu reden."},{"name":"Liu Yiqiu","gruppe":"Soziologie","extern":false,"beschreibung":"Urbanistik und Stadtsoziologie an der ETH. Profil bitte selbst ergänzen."},{"name":"Catherine De Wolf","gruppe":"Circular Construction CEA","extern":false,"beschreibung":"Assistenzprofessorin für Circular Engineering for Architecture. Leitet ein interdisziplinäres Team aus Bauingenieurwesen, Architektur, Urbanistik und Informatik mit dem Ziel, die Wiederverwendung von Bauteilen zu automatisieren. Entwickelte einen fünfstufigen digitalen Kreislauf-Workflow – digitale Produktpässe, KI-gestützte Materialklassifikation, Reality Capture, computergestützter Entwurf, Blockchain – und demontierte dafür mehrere Abbruchgebäude. Herausgeberin von «A Circular Built Environment in the Digital Age» (Springer, open access). Doktorat und MSc am MIT."},{"name":"Mikhael Johanes","gruppe":"Circular Construction CEA","extern":false,"beschreibung":"Design++ Postdoctoral Fellow am CEA. Entwickelt multimodale generative Modelle für Umbau und Weiternutzung von Bestandsgebäuden, im Rahmen des Projekts SWIRCULAR zur digitalen Transformation des zirkulären Bauens."},{"name":"Kasimir Forth","gruppe":"Circular Construction CEA","extern":false,"beschreibung":"Postdoktorand am CEA. BIM, automatisierte Ökobilanzierung und digitale Werkzeuge für zirkuläres Bauen – der Teil der Forschung, der sich am direktesten in ein Planungsbüro übersetzen lässt."},{"name":"Clara Blum","gruppe":"Circular Construction CEA","extern":false,"beschreibung":"Computational Designer und Doktorandin am CEA. B.Sc. Architektur TU Berlin, M.Sc. ITECH Stuttgart; Masterarbeit «Reclaimed Design» über eine verfügbarkeitsorientierte Entwurfsmethodik für wiedergewonnenes Bauholz. Entwickelt in der Innosuisse-Initiative Think Earth ein standardisiertes digitales ID-System für regenerative Materialien wie Holz und Lehm, das Lebenszyklen in Schweizer Lieferketten nachverfolgbar macht."},{"name":"Zain Karsan","gruppe":"Circular Construction CEA","extern":false,"beschreibung":"Doktorand am CEA, arbeitet zugleich mit dem DBT. M.Arch (2018) und M.Sc. Computational Design and Mechanical Engineering (2023) am MIT, Masterarbeit «Liquid Metal Printing»; dort auch technischer Instruktor für digitale Fabrikation, Robotik und Präzisionsbearbeitung. Entwickelt robotische Systeme für den selektiven Rückbau – Maschinen, die Gebäude auseinandernehmen statt aufbauen."},{"name":"Vanessa Schwarzkopf","gruppe":"Circular Construction CEA","extern":false,"beschreibung":"Doktorandin am CEA seit Januar 2024. Digitale Methoden für zirkuläres Bauen und die strukturierte Erfassung des Gebäudebestands."},{"name":"Vanessa Costalonga Martins","gruppe":"Circular Construction CEA","extern":false,"beschreibung":"Doktorandin am CEA. Computational Design, digitale Fertigung und Materialforschung. Diplom in Architektur und Urbanismus der Universidade de Brasília, M.Sc. ITECH Stuttgart, zuvor wissenschaftliche Mitarbeiterin am Lehrstuhl BioMat für biobasierte Materialien und Materialkreisläufe."},{"name":"Bayonle Windapo","gruppe":"Circular Construction CEA","extern":false,"beschreibung":"Computational Designer und Architekt, Doktorand am CEA. Verbindet BIM, computergestützten Entwurf und Reality Capture, um semantische Wiederverwendungsdaten zu erzeugen – aus einem Scan wird ein Datensatz, mit dem sich ein Bauteil tatsächlich handeln lässt."},{"name":"Vasiliki Kirtsou","gruppe":"Circular Construction CEA","extern":false,"beschreibung":"Vasiliki Kirtsou is a researcher at the Chair of Circular Engineering for Architecture (CEA) led by Prof. Dr. Catherine De Wolf at ETH Zurich, focusing on digital workflows and sustainable reuse in circular construction."},{"name":"Fabio Gramazio","gruppe":"Digitales Bauen GKR","extern":false,"beschreibung":"Professor für Architektur und digitale Fabrikation, gemeinsam mit Matthias Kohler Gramazio Kohler Research. Pioniere der robotischen Fertigung in der Architektur seit 2005. Ihr erstes gebautes Projekt steht in Graubünden: die roboterisch gemauerte Fassade des Weinguts Gantenbein in Fläsch."},{"name":"Matthias Kohler","gruppe":"Digitales Bauen GKR","extern":false,"beschreibung":"Professor, gemeinsam mit Fabio Gramazio. Leitete den Nationalen Forschungsschwerpunkt Digitale Fabrikation, aus dem ein grosser Teil der hier versammelten Technologien überhaupt erst hervorgegangen ist – von Tor Alva bis zum DFAB House."},{"name":"Gonzalo Casas","gruppe":"Digitales Bauen GKR","extern":false,"beschreibung":"Software-Entwickler bei Gramazio Kohler Research und einer der Hauptentwickler von COMPAS, dem offenen Python-Framework für computergestützten Entwurf, Robotik und Fertigung im Bauwesen. Die Software, mit der ein kleines Büro ohne Lizenzkosten anfangen kann."},{"name":"Eric Gozzi","gruppe":"Digitales Bauen GKR","extern":false,"beschreibung":"Gramazio Kohler Research. Robotische Fertigung und Software für Bauprozesse. Profil bitte selbst ergänzen."},{"name":"Philippe Block","gruppe":"Block Research Group ETH","extern":false,"beschreibung":"Professor für Tragwerksentwurf an der ETH und Leiter der Block Research Group. Forscht zu Gewölbetragwerken, Formfindung und materialsparenden Decken; gebaute Beispiele sind das gekrümmte HiLo-Dach im NEST der Empa und die schalungsfrei montierte, 3D-gedruckte Steinbogenbrücke Striatus. Sein Argument in einem Satz: Geometrie kann Material ersetzen."},{"name":"Daniela Mitterberger","gruppe":"Human Augmentation ETH","extern":false,"beschreibung":"Assistenzprofessorin für Architecture and Human Augmentation an der ETH, berufen im Dezember 2025, zuvor Princeton. Doktorat 2023 an der ETH zu «Adaptive digital fabrication and human-machine collaboration for architecture»; leitet die Entwicklung von COMPAS XR, einem offenen Framework für Extended Reality und Robotik im Bauwesen. Mitgründerin des Wiener Büros MAEID."},{"name":"Elisabetta Fedele","gruppe":"AI Center ETH","extern":false,"beschreibung":"Doctoral Fellow am ETH AI Center. 3D-Szenenverständnis, 3D-Rekonstruktion und Diffusionsmodelle; das Ziel ist, Weltmodelle in kompakten 3D-Repräsentationen zu verankern. Arbeiten: SuperDec, das 3D-Szenen in Superquadriken zerlegt (ICCV 2025), und OpenMask3D zur Open-Vocabulary-Instanzsegmentierung in 3D (NeurIPS 2023)."},{"name":"Haoyang Zhou","gruppe":"AI Center ETH","extern":false,"beschreibung":"Doktorand am ETH AI Center, angesiedelt am Computational Design Laboratory. Machine Learning für Entwurf und Fertigung."},{"name":"Raphael Baur","gruppe":"AI Center ETH","extern":false,"beschreibung":"ETH AI Center. Computer Vision und Machine Learning. AI in architecture, human-AI collaboration, intelligence augmentation, reinforcement learning, probabilistic programming."},{"name":"Russell Loveridge","gruppe":"NFS Digitale Fabrication","extern":false,"beschreibung":"Geschäftsführer des NFS Digitale Fabrikation seit dessen offiziellem Start in 2014."},{"name":"Ramon Weber","gruppe":"UC Berkeley","extern":false,"beschreibung":"Assistenzprofessor für Architektur an der UC Berkeley (College of Environmental Design) und Leiter des Spatial Systems Lab. Doktorat am MIT in Building Technology zu Werkzeugen für Entwurf und Analyse CO₂-armer Gebäude; Studium an ETH, Universität Stuttgart und MIT Media Lab. Untersucht, wie computergestützter Entwurf, KI und Gebäudesimulation zu nachhaltigerer Architektur führen."},{"name":"Alexander Htet Kyaw","gruppe":"MIT","extern":false,"beschreibung":"Doppelabschluss-Kandidat am MIT (M.Sc. Architectural Studies in Computation und M.Sc. Electrical Engineering and Computer Science); arbeitet mit dem Digital Structures Lab, dem Media Lab und dem CSAIL. Verbindet KI, Augmented Reality und Robotik mit Gesten-, Sprach- und Objekterkennung. Projekte: «Speech to Reality» mit Neil Gershenfeld – eine gesprochene Beschreibung wird über generative 3D-Modelle zu einem robotisch gefertigten Objekt – und der Unlog Tower aus Eschenstämmen, in AR mit der Fingerspitze vermessen."},{"name":"Neil Gershenfeld","gruppe":"MIT","extern":false,"beschreibung":"Direktor des MIT Center for Bits and Atoms. Begründer der weltweiten Fab-Lab-Bewegung und des Kurses «How to Make Almost Anything»; arbeitet an digitalen Materialien und selbstassemblierenden Strukturen. Das interessanteste Modell, falls aus einer Reihe von Veranstaltungen eine dauerhafte Werkstatt vor Ort werden soll."},{"name":"Martin Bechthold","gruppe":"Harvard GSD","extern":false,"beschreibung":"Professor für Architekturtechnologie an der Harvard GSD, leitet die Material Processes and Systems Group. Robotik, Keramik und neue Materialprozesse im Bauwesen – und die Frage, wie sich Handwerkstradition und automatisierte Fertigung verbinden lassen, statt sich auszuschliessen."},{"name":"Gilles Retsin","gruppe":"ITA Gastdozentur / Design Computation","extern":false,"beschreibung":"Architekt an der Bartlett School of Architecture (UCL), Programmdirektor des M.Arch Architectural Design und Mitgründer des Design Computation Lab. «Discrete Architecture»: Bauen aus wenigen, identischen, robotisch fügbaren Bausteinen, die sich aus verbreitetem Plattenmaterial zuschneiden lassen. Erster Preis an der Tallinn Architecture Biennale und Installation an der Royal Academy of Arts. Seit 2024 Gastdozent am ITA der ETH."},{"name":"Johan Wijesinghe","gruppe":"ITA Gastdozentur / Design Computation","extern":false,"beschreibung":"Architekt und Forscher aus Los Angeles. Computational Design, generativer Entwurf, Massivholz-Vorfertigung und KI in der Architektur. 2020–2024 bei LEVER Architecture, wo er als Projektdesigner und BIM-Manager Tragwerkssysteme für Erdbeben-, Brand- und Akustikanforderungen entwickelte, darunter Diagrid-Exoskelette aus Holz und Rocking-Wall-Systeme. Unterrichtet mit Gilles Retsin das Studio «Architecture in Large Quantities» am ITA."},{"name":"Greg Demchak","gruppe":"Bentley Studio","extern":false,"beschreibung":"Bentley Systems, Bentley Studio. Digitale Zwillinge und die iTwin-Plattform; Visualisierung und Auswertung grosser Infrastrukturdatensätze. Naheliegender Partner, sobald RhB oder Tiefbauamt einen digitalen Zwilling ihrer Kunstbauten wollen."},{"name":"Madeline Gannon","gruppe":"AntonAnton","extern":false,"beschreibung":"Madeline Gannon is a multidisciplinary designer and roboticist who tames robots to make us feel. Known as the \"Robot Whisperer,\" her work bridges cutting-edge robotics, AI, and the human experience, proving that creativity is essential to shaping how these technologies impact society. As a former NVIDIA roboticist, she brings deep technical fluency to building more optimistic futures with machines."},{"name":"Michael Hansmeyer","gruppe":"Extern – Forschung international","extern":true,"beschreibung":"Architekt und Programmierer in Zürich. Entwarf mit Benjamin Dillenburger Tor Alva sowie algorithmisch erzeugte Räume und Säulen («Digital Grotesque»). Arbeitet mit Subdivisionsverfahren, die Geometrien erzeugen, die kein Mensch zeichnen würde."},{"name":"Kathrin Dörfler","gruppe":"Extern – Forschung international","extern":true,"beschreibung":"Professorin für Digital Fabrication an der TU München, leitet das Augmented Fabrication Lab. Robotische und Mixed-Reality-Fertigung direkt auf der Baustelle – sie instruiert Maurer über AR-Schnittstellen, damit sie geometrisch präzise Bauteile nach 3D-Modell errichten können. Best Workshop Award der ROB|ARCH 2024."},{"name":"Achim Menges","gruppe":"Extern – Forschung international","extern":true,"beschreibung":"Professor am Institut für Computerbasiertes Entwerfen (ICD) der Universität Stuttgart. Robotischer Holzbau, bio-inspirierte Materialsysteme und die BUGA-Pavillons – der wohl sichtbarste Beleg dafür, dass Forschungspavillons ein Publikum finden."},{"name":"Jan Knippers","gruppe":"Extern – Forschung international","extern":true,"beschreibung":"Professor am Institut für Tragkonstruktionen und Konstruktives Entwerfen (ITKE) in Stuttgart. Tragwerksentwurf für Faserverbund- und Leichtbaustrukturen, langjähriger Partner von Achim Menges."},{"name":"Sigrid Brell-Cokcan","gruppe":"Extern – Forschung international","extern":true,"beschreibung":"Professorin für Individualized Production an der RWTH Aachen. Baurobotik, Maschinensteuerung und Sicherheit auf der Baustelle; treibt die Standardisierung von Robotik im Bauprozess voran."},{"name":"Norman Hack","gruppe":"Extern – Forschung international","extern":true,"beschreibung":"Professor an der TU Braunschweig. Additive Fertigung im Bauwesen, insbesondere Bewehrungsstrategien für gedruckten Beton – die Frage, die entscheidet, ob 3D-Druck tragende Bauteile hervorbringen kann."},{"name":"Konrad Schindler","gruppe":"Extern – Forschung international","extern":true,"beschreibung":"Professor für Photogrammetrie und Fernerkundung an der ETH. 3D-Rekonstruktion und Bildanalyse aus Luft-, Drohnen- und Satellitendaten – die Grundlage jeder grossflächigen digitalen Bestandsaufnahme."},{"name":"Marc Pollefeys","gruppe":"Extern – Forschung international","extern":true,"beschreibung":"Professor für Computer Vision an der ETH. 3D-Rekonstruktion, SLAM und Mixed Reality; leitete zuvor die Forschung zu Microsoft HoloLens. Wenn Kameras auf einer Baustelle verstehen sollen, was sie sehen, kommt man an dieser Gruppe nicht vorbei."},{"name":"Francis Engelmann","gruppe":"Extern – Forschung international","extern":true,"beschreibung":"Forscher zu 3D-Szenenverständnis und Open-Vocabulary-Segmentierung, Ko-Autor von OpenMask3D. Arbeitet daran, dass sich 3D-Szenen mit normaler Sprache durchsuchen lassen."},{"name":"Zindel United","gruppe":"Extern – Praxis & Industrie","extern":true,"beschreibung":"Bündner Holz- und Baubetrieb. Führte den Bau von Tor Alva in Mulegns aus – der naheliegendste Praxispartner für Hands-on-Formate, und der Beleg, dass ein regionaler Betrieb solche Projekte kann."},{"name":"FenX AG","gruppe":"Extern – Praxis & Industrie","extern":true,"beschreibung":"ETH-Spin-off. Mineralische Dämmschäume aus recycelten Industrieabfällen; das Material hinter Patrick Bedarfs Airlements."},{"name":"Empa / NEST","gruppe":"Extern – Praxis & Industrie","extern":true,"beschreibung":"Schweizer Materialforschung mit dem Gebäudedemonstrator NEST in Dübendorf – ein durchgehend funktionierendes Vorbild für «Bauen als Versuchsanordnung», inklusive Betriebsmodell."},{"name":"Holcim Innovation Center","gruppe":"Extern – Praxis & Industrie","extern":true,"beschreibung":"Zement- und Betontechnologie, Materialentwicklung für 3D-Druckverfahren."},{"name":"Sika Schweiz","gruppe":"Extern – Praxis & Industrie","extern":true,"beschreibung":"Bauchemie und Zusatzmittel für digitale Fertigungsverfahren; ohne die richtige Rezeptur druckt kein Roboter."},{"name":"Bentley Systems","gruppe":"Extern – Praxis & Industrie","extern":true,"beschreibung":"Software für digitale Zwillinge von Infrastruktur (iTwin). Der Kontakt besteht bereits über Greg Demchak."},{"name":"Autodesk Research","gruppe":"Extern – Praxis & Industrie","extern":true,"beschreibung":"Forschung zu generativem Entwurf und Fertigungssoftware; interessant als Sponsor und als Gegenposition zu Open Source."},{"name":"Innosuisse","gruppe":"Extern – Praxis & Industrie","extern":true,"beschreibung":"Schweizerische Agentur für Innovationsförderung. Mögliche Ko-Finanzierung von Transferprojekten neben GRdigital – Clara Blums Arbeit läuft bereits über eine Innosuisse-Initiative."},{"name":"Implenia / Rhomberg Digital","gruppe":"Extern – Praxis & Industrie","extern":true,"beschreibung":"Baukonzerne mit eigenen Digitalisierungseinheiten. Nützliches Gegengewicht zur reinen Forschungsperspektive, wenn es um Kosten und Termine geht."},{"name":"Gion A. Caminada","gruppe":"Extern – Graubünden & Region","extern":true,"beschreibung":"Architekt in Vrin, emeritierter Professor der ETH. Bauen aus dem Ort heraus, Strickbau, alpine Baukultur. Der produktivste Gegenpol zu einem reinen Technologieprogramm – und jemand, dem im Kanton zugehört wird."},{"name":"Jürg Conzett","gruppe":"Extern – Graubünden & Region","extern":true,"beschreibung":"Bauingenieur, Conzett Bronzini Partner in Chur. Brückenbau in Graubünden, darunter der Traversinersteg und die Punt da Suransuns. Zeigt, dass Ingenieurskunst im Kanton auch ohne Digitalisierung Weltklasse war – ein gutes Korrektiv für jedes KI-Panel."},{"name":"Bearth & Deplazes","gruppe":"Extern – Graubünden & Region","extern":true,"beschreibung":"Architekturbüro in Chur. Unter anderem die Neue Monte-Rosa-Hütte, digital geplant mit der ETH, und die Weingut-Gantenbein-Fassade in Fläsch zusammen mit Gramazio Kohler."},{"name":"Fachhochschule Graubünden","gruppe":"Extern – Graubünden & Region","extern":true,"beschreibung":"Chur. Bachelor Computational and Data Science, Bauingenieurwesen, Mobile Robotics und Photonics; Forschungsschwerpunkte auf angewandten Zukunftstechnologien und der Entwicklung im alpinen Raum, oft in Reallaboren. Der naheliegendste akademische Partner im Kanton selbst."},{"name":"ibW Höhere Fachschule Südostschweiz","gruppe":"Extern – Graubünden & Region","extern":true,"beschreibung":"Berufs- und Weiterbildung im Bau- und Technikbereich. Der direkte Zugang zu Lernenden und zu Betrieben, die keine Forschungsabteilung haben."},{"name":"Kantonale Denkmalpflege GR","gruppe":"Extern – Graubünden & Region","extern":true,"beschreibung":"Fachstelle für das Baukulturerbe des Kantons und natürlicher Partner für alle Heritage-Themen – vom Scan bis zum Ersatzteil."},{"name":"SLF / WSL Davos","gruppe":"Extern – Graubünden & Region","extern":true,"beschreibung":"Institut für Schnee- und Lawinenforschung. Naturgefahren, Monitoring und Simulation, bereits im Kanton verankert und mit eigenem Publikum."},{"name":"Bündner Gewerbeverband","gruppe":"Extern – Graubünden & Region","extern":true,"beschreibung":"Dachverband des lokalen Gewerbes und Partner von GRdigital. Direkter Zugang zu KMU – und damit zur Zielgruppe, an der sich die Förderung messen lässt."},{"name":"GRdigital Geschäftsstelle","gruppe":"Extern – Graubünden & Region","extern":true,"beschreibung":"Fach- und Koordinationsstelle für die digitale Transformation im Kanton, mit Leistungsauftrag bis 2030 und dem ausdrücklichen Auftrag, den Wissenstransfer zwischen Branchen zu stärken. Erste Adresse für Förderung und Vernetzung."},{"name":"Rhätische Bahn","gruppe":"Extern – Graubünden & Region","extern":true,"beschreibung":"Infrastrukturbetreiberin mit hunderten Kunstbauten in extremer Lage. Monitoring, Zustandserfassung und digitale Zwillinge – und ein Publikum, das ohnehin durch die Täler fährt."},{"name":"Amt für Wald und Naturgefahren GR","gruppe":"Extern – Graubünden & Region","extern":true,"beschreibung":"Zuständig für die Holzressourcen des Kantons und für Gefahrenprävention. Relevant für alles, was mit lokalem Holz oder mit Lawinen- und Steinschlagsimulation zu tun hat."}],"themen":[{"thema":"MAS ETH","beschreibung":"Gelateria 2.0 Daniela und Benjamin, Holz-Pavilion mit Hollow-Core Shell","formattyp":"Zukunftsmusik","veranstaltungsformen":[],"personen":[],"notiz":"Juni in Mulgens"},{"thema":"Mensch × Maschine","beschreibung":"Aufführung im Zusammenspiel von Mensch und Maschine. Bewegung, Klang, Licht, Material und Raum werden zu Vermittlern zwischen menschlicher Wahrnehmung und maschineller Präzision. Der Roboter ist nicht bloss Werkzeug oder ausführende Maschine, sondern wird zum Gegenüber: Er reagiert, interpretiert, wiederholt, verstärkt oder widerspricht menschlichen Handlungen.\n\nDie Aufführung untersucht damit eine grundlegende Frage unserer zunehmend digitalisierten Umwelt: Wie verändert sich unser Verhältnis zu Technologie, wenn wir ihr nicht nur über Bildschirme und Interfaces begegnen, sondern körperlich, räumlich und sinnlich?","formattyp":"Zukunftsmusik","veranstaltungsformen":["Ausstellung / Installation","Residency (Researcher / Artist in Residence)"],"personen":["Madeline Gannon"],"notiz":"https://atonaton.com/archive\nhttps://atonaton.com/other-natures\nhttps://shorturl.at/9DsAo\nhttps://shorturl.at/FopPt\nhttps://shorturl.at/pyDmt"},{"thema":"(Kunst-)Wettbewerb","beschreibung":"Der Wettbewerb versteht Digitalisierung nicht primär als technologische Entwicklung, sondern als Anlass, bestehende Strukturen, Beziehungen und Möglichkeiten neu zu denken.\n\nGesucht werden Konzepte, die untersuchen, wie digitale Technologien neue Zugänge zum Raum, zur Kultur und zum gesellschaftlichen Leben in Graubünden eröffnen können und dies in Beziehung zu einander stellt.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Studierendenwettbewerb","Ausstellung / Installation"],"personen":[],"notiz":""},{"thema":"Tor Alva – ein Turm als Datensatz","beschreibung":"Rückblick auf den Weissen Turm in Mulegns: vom parametrischen Modell über die Fabrikation bis zur Montage im Tal. Was hat funktioniert, was war teurer als gedacht, was ist übertragbar?","formattyp":"Reflexion auf Gebautes","veranstaltungsformen":["Vortrag","Führungen"],"personen":["Benjamin Dillenburger","Michael Hansmeyer","Zindel United","Matthias Leschok","Ana Anton","Jürg Conzett"],"notiz":"https://ethz.ch/en/news-and-events/eth-news/news/2025/05/from-confectioners-to-robots-tor-alva-in-mulegns-is-unveiled.html"},{"thema":"Beton ohne Schalung","beschreibung":"3D-Betondruck ehrlich bilanziert: Stand der Technik, Kosten, Normen. Für welche Bauteile lohnt sich das heute schon in einem kleinen Bündner Baubetrieb?","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Workshop (Hands-on)","Fachgespräch"],"personen":["Andrei Jipa","Ana Anton","Zindel United","Holcim Innovation Center"],"notiz":""},{"thema":"Gedruckte Dämmung aus Reststoffen","beschreibung":"Mineralschaum-3D-Druck (Airlements) aus recycelten Industrieabfällen: monolithische, dämmende Wandsysteme ohne Verbundaufbau – gebaut für alpine Temperaturunterschiede.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Vortrag","Open LAB / Tag der offenen Werkstatt"],"personen":["Patrick Bedarf","FenX AG","Empa / NEST"],"notiz":"https://dbt.arch.ethz.ch/project/airlements/"},{"thema":"Punktwolke, Splat, Denkmal","beschreibung":"Photogrammetrie, LiDAR und 3D Gaussian Splatting als Werkzeuge der Bauaufnahme. Von der Drohne zum überprüfbaren Bestandsmodell – an einem Tag erklärt und einmal selbst gemacht.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Workshop (Hands-on)","ETH-Exkurs/Ausflug","Vortrag"],"personen":["Bharath Seshadri","Konrad Schindler","Wen-Shan Cui","Desmond Liu"],"notiz":"https://ethz.ch/en/news-and-events/eth-news/news/2025/11/ai-and-extended-reality-help-to-preserve-built-cultural-heritage.html"},{"thema":"Digitales Konstruktionsarchiv Graubünden","beschreibung":"Wie dokumentiert man digital geplante und gedruckte Bauwerke so, dass sie in 50 Jahren noch reparierbar sind? Aufbau eines offenen Bauteil- und Fabrikationsarchivs, ausgehend von der Sammlung der Stiftung.","formattyp":"Zukunftsmusik","veranstaltungsformen":["Symposium/Research-Tagung"],"personen":["Silke Langenberg","Dominik Reisach","Wen-Shan Cui","Benjamin Dillenburger","Ana Anton"],"notiz":""},{"thema":"Bauteiljäger – KI-gestützte Wiederverwendung","beschreibung":"Reality Capture plus Bildklassifikation, um Bauteile aus Umbau- oder Abbruchobjekten zu erfassen, zu bewerten und digital handelbar zu machen. Materialpässe für den Bündner Bestand.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Workshop (Hands-on)","Matchmaking-Apéro mit KMU"],"personen":["Catherine De Wolf","Kasimir Forth","Clara Blum","Vanessa Costalonga Martins","Mikhael Johanes","Vanessa Schwarzkopf","Bayonle Windapo"],"notiz":"https://www.sciencedirect.com/science/article/pii/S0921344923002768?via%3Dihub"},{"thema":"Trockenmauer trifft Roboter","beschreibung":"Der Bündner Trockenmauerbau als Testfall für Computer Vision: unregelmässige Natursteine scannen, algorithmisch sortieren und roboterunterstützt versetzen – ohne das Handwerk zu ersetzen.","formattyp":"Zukunftsmusik","veranstaltungsformen":["ETH-Seminarwoche","ETH-Exkurs/Ausflug","Sommerakademie / Summer School"],"personen":["Fabio Gramazio","Matthias Kohler","Maria Smigielska","Zain Karsan","Martin Bechthold","Vasiliki Kirtsou"],"notiz":""},{"thema":"Bündner Holz, digital sortiert","beschreibung":"Vom Stamm zum Bauteil: krummes, lokales Rundholz scannen und algorithmisch Tragwerkselementen zuordnen. Weniger Verschnitt, mehr Wertschöpfung im Tal.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Workshop (Hands-on)","Baustellen-Exkursion / Wanderformat"],"personen":["Ramon Weber","Gonzalo Casas","Johan Wijesinghe","Amt für Wald und Naturgefahren GR","Eric Gozzi"],"notiz":""},{"thema":"Diskrete Architektur – Bauen mit Teilen von der Stange","beschreibung":"Statt jedes Bauteil einzigartig: wenige, identische, robotisch fügbare Holzbausteine aus Plattenmaterial. Reversibel, reparierbar, skalierbar – und für kleine Werkstätten produzierbar.","formattyp":"Zukunftsmusik","veranstaltungsformen":["ETH-Seminarwoche","Studierendenwettbewerb"],"personen":["Gilles Retsin","Johan Wijesinghe","Maria Smigielska","Zindel United","Eric Gozzi"],"notiz":"https://auar.io/"},{"thema":"Wohnraum in grossen Stückzahlen","beschreibung":"Computational Design für seriellen Holzbau: Wie entwirft man tausend Wohnungen, ohne tausendmal von vorn anzufangen? Übertragen auf die Frage nach bezahlbarem, ganzjährigem Wohnraum in den Tälern.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Symposium/Research-Tagung","Fachgespräch"],"personen":["Johan Wijesinghe","Gilles Retsin","Christian Schmid","Ramon Weber","Benjamin Dillenburger"],"notiz":"https://auar.io/"},{"thema":"Sprich mit dem Gebäude","beschreibung":"Generative KI im Entwurf: Text- und Sprachbefehle, die direkt in Geometrie und Roboterbahnen übersetzt werden. Live-Demo statt Folienschlacht.","formattyp":"Zukunftsmusik","veranstaltungsformen":["Vortrag","Open LAB / Tag der offenen Werkstatt","Fachgespräch","Symposium/Research-Tagung"],"personen":["Alexander Htet Kyaw","Neil Gershenfeld"],"notiz":"https://dl.acm.org/doi/full/10.1145/3745778.3766670"},{"thema":"AR auf der Baustelle","beschreibung":"Mixed Reality statt Papierplan: Bauteile im Massstab 1:1 einmessen und montieren. Was bringt das auf einer schwer zugänglichen Alpenbaustelle wirklich?","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Workshop (Hands-on)","Symposium/Research-Tagung","Fachgespräch","Vortrag"],"personen":["Kathrin Dörfler","Daniela Mitterberger","Alexander Htet Kyaw"],"notiz":""},{"thema":"KI entwirft Brücken","beschreibung":"Machine Learning für Entwurf, Bemessung und Zustandsbeurteilung von Brücken – am Beispiel der Bahn- und Strassenbrücken im Gebirge.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Fachgespräch","Vortrag"],"personen":["Sophia Kuhn","Rafael Bischof","Rhätische Bahn","Jürg Conzett"],"notiz":""},{"thema":"Neural Rendering für Architektur","beschreibung":"Differenzierbares Rendering, neuronale Materialien und die Frage, was die Computergrafik dem architektonischen Entwurf zurückgibt.","formattyp":"Zukunftsmusik","veranstaltungsformen":["Vortrag","LAB Retreats","Workshop (Hands-on)","Lehrlings- und Schulformat","Fachgespräch","Ausstellung / Installation","Bürger*innen-Werkstatt"],"personen":["Bernd Bickel","Kenji Tojo","Pengbin Tang"],"notiz":""},{"thema":"Material, das man ausrechnen kann","beschreibung":"Computational Fabrication: Erscheinungsbild, Steifigkeit und Haptik als optimierbare Grössen. Vom Simulationsmodell zum gedruckten Muster.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["ETH-Exkurs/Ausflug","Workshop (Hands-on)"],"personen":["Bernd Bickel","Desmond Liu","Anna Maria Eggler","Rafael Bischof"],"notiz":""},{"thema":"Erde, Pilz, Algorithmus","beschreibung":"Biobasierte und lehmbasierte Materialien im robotischen Druck: reversibel, lokal, kompostierbar. Was passiert mit einem Bauteil, das man wieder auflösen kann?","formattyp":"Zukunftsmusik","veranstaltungsformen":["Workshop (Hands-on)","Ausstellung / Installation"],"personen":["Tiziano Derme","Karen A. Antorveza Páez"],"notiz":""},{"thema":"Bühne als Prototyp","beschreibung":"Digitale Fabrikation für Szenografie: Bühnenbilder sind schnelle, risikoarme Testfälle für Bautechnologie. (2019 in den Gärten der Villa Carisch)","formattyp":"Reflexion auf Gebautes","veranstaltungsformen":["Residency (Researcher / Artist in Residence)","Ausstellung / Installation"],"personen":["Benjamin Dillenburger","Matthias Leschok","Angela Yoo"],"notiz":""},{"thema":"Gedruckte Hüllen und Fassaden","beschreibung":"Polymerdruck für dünne, lichtdurchlässige Bauteile – von der Bühne ins Gebäude. Was hält, was altert, was leuchtet?","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Vortrag","Ausstellung / Installation"],"personen":["Matthias Leschok","Angela Yoo"],"notiz":"https://saeki.ai/"},{"thema":"Der Ort als Modell","beschreibung":"Digitale Zwillinge für Dörfer im Wandel: Mulegns, Riom und die Frage, wie man Leerstand, Nutzung, Energie und Klima gemeinsam simuliert – und wer die Daten besitzt.","formattyp":"Zukunftsmusik","veranstaltungsformen":["Symposium/Research-Tagung","Bürger*innen-Werkstatt"],"personen":["Christian Schmid","Vanessa Schwarzkopf","Fachhochschule Graubünden","Dominik Reisach"],"notiz":""},{"thema":"Wer baut die Zukunft?","beschreibung":"Soziologische Perspektive: Was macht Automatisierung mit Arbeit, Handwerk und Dorfgemeinschaft im Berggebiet? Bewusst kontrovers besetzt.","formattyp":"Zukunftsmusik","veranstaltungsformen":["Fachgespräch","Winter-Salon / Kamingespräch"],"personen":["Christian Schmid","Liu Yiqiu","Bündner Gewerbeverband","Benjamin Dillenburger","Tiziano Derme","Fabio Gramazio","Matthias Kohler","Daniela Mitterberger"],"notiz":""},{"thema":"Sensoren im Schnee","beschreibung":"Monitoring alpiner Bauten: Feuchte, Temperatur, Setzung, Frost-Tau-Wechsel. Von Rohdaten zu Wartungsentscheidungen mit Machine Learning.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Vortrag","Baustellen-Exkursion / Wanderformat"],"personen":["Bharath Seshadri","Sophia Kuhn","SLF / WSL Davos"],"notiz":""},{"thema":"Open Source im Bauwesen","beschreibung":"COMPAS & Co.: Wie kleine Büros ohne Lizenzkosten computational arbeiten. Vom ersten Skript zur Roboterbahn an einem Tag.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Workshop (Hands-on)","Hackathon / Design-Sprint (48h)"],"personen":["Gonzalo Casas","Eric Gozzi","Daniela Mitterberger"],"notiz":""},{"thema":"Vom Scan zum Denkmalpflegeplan","beschreibung":"Digitale Erfassung historischer Bausubstanz und die Herstellung passgenauer Ersatzteile mit additiver Fertigung – präzise, ressourcenschonend, ohne Grossersatz.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["ETH-Seminarwoche","Fachkurs mit Teilnahmezertifikat"],"personen":["Silke Langenberg","Stefania Rasile","Matthias Brenner","Wen-Shan Cui"],"notiz":""},{"thema":"Sehen lernen – Computer Vision auf der Baustelle","beschreibung":"Objekterkennung, Fortschrittskontrolle und Sicherheitsprüfung per Kamera. Baustellenlogistik im engen alpinen Raum, wo kein Platz für Zwischenlager ist.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Workshop (Hands-on)","Baustellen-Exkursion / Wanderformat"],"personen":["Elisabetta Fedele","Raphael Baur","Marc Pollefeys","Sigrid Brell-Cokcan","Bernd Bickel"],"notiz":""},{"thema":"Form aus Kraft","beschreibung":"Formfindung, Schalen und Membranstrukturen: leichte, demontierbare Bauten für temporäre Spielorte. Rechnen, bis das Material das Minimum ist.","formattyp":"Reflexion auf Gebautes","veranstaltungsformen":["Vortrag","Workshop (Hands-on)"],"personen":["Philippe Block","Victoria Roznowski","Nik Eftekhar","Jan Knippers"],"notiz":""},{"thema":"Datenkultur für Bündner Baubetriebe","beschreibung":"Aufmass, Scans, Modell, Kalkulation, Übergabe. Was sich für einen Betrieb mit zwölf Personen wirklich rechnet – und was nicht.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Matchmaking-Apéro mit KMU","Fachkurs mit Teilnahmezertifikat"],"personen":["Greg Demchak","Bündner Gewerbeverband","ibW Höhere Fachschule Südostschweiz","Kasimir Forth"],"notiz":""},{"thema":"Nachwuchs – Robotik für Lernende","beschreibung":"Kurzformat für Lehrlinge und Berufsschüler*innen: einen Roboterarm programmieren, ein eigenes Bauteil mitnehmen. Ohne Vorkenntnisse.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Lehrlings- und Schulformat","Kinder- und Familienformat"],"personen":["Ariel Lim","Andrei Jipa","ibW Höhere Fachschule Südostschweiz","Ana Anton","Matthias Leschok","Victoria Roznowski"],"notiz":""},{"thema":"Alpines Bauen als Datensatz","beschreibung":"Was am Bauen im Tal lässt sich überhaupt digitalisieren – und was ausdrücklich nicht? Ein 'Streit-'Gespräch zwischen Ortsverbundenheit und Rechenleistung.","formattyp":"Zukunftsmusik","veranstaltungsformen":["Fachgespräch","Winter-Salon / Kamingespräch"],"personen":["Gion A. Caminada","Silke Langenberg","Christian Schmid","Bearth & Deplazes","Benjamin Dillenburger","Fabio Gramazio","Matthias Kohler"],"notiz":""},{"thema":"Robotik ohne Halle","beschreibung":"Mobile, seilgeführte und fliegende Robotik für Orte, an die keine Maschine kommt. Bauen dort, wo die Strasse aufhört.","formattyp":"Zukunftsmusik","veranstaltungsformen":["LAB Retreats","ETH-Seminarwoche"],"personen":["Fabio Gramazio","Matthias Kohler","Maria Smigielska","Norman Hack"],"notiz":""},{"thema":"Vom Archiv in die Maschine","beschreibung":"Historische Pläne, Fotos und Bühnenentwürfe der Origen-Sammlung mit OCR und Vision-Modellen erschliessen und in aktuelle Entwurfswerkzeuge zurückspielen.","formattyp":"Reflexion auf Gebautes","veranstaltungsformen":["MAS-Format","Residency (Researcher / Artist in Residence)"],"personen":["Wen-Shan Cui","Mikhael Johanes","Elisabetta Fedele","Rafael Bischof"],"notiz":""},{"thema":"Vom Prototyp zum Unterhaltsplan","beschreibung":"Wie bleiben digital gefertigte Bauten langfristig nutzbar? Ersatzteilmodelle, Wartungsintervalle und Verantwortlichkeiten gemeinsam mit lokalen Betrieben als praktischen Unterhaltsplan entwickeln.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Fachgespräch","Workshop (Hands-on)"],"personen":[],"notiz":""},{"thema":"Die ganze Bilanz – Material, Transport, Rückbau","beschreibung":"Digitale Bauweisen anhand ihres gesamten Lebenswegs vergleichen: Materialbedarf, Transporte ins Tal, Betriebsenergie und Rückbau. An einem Bauteil Annahmen und Unsicherheiten sichtbar machen.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Workshop (Hands-on)","Fachgespräch"],"personen":["Benjamin Dillenburger","Ana Anton","Matthias Leschok"],"notiz":""},{"thema":"3D Model zum Kulturort","beschreibung":"Digitale Aufmasse und begehbare Modelle nutzen, um Umbauszenario, Wege und Orientierung an bestehenden Strukturen gemeinsam mit Bevölkerung und Fachpersonen zu prüfen. Lösungen für unterschiedliche Raum- und Wahrnehmungsbedürfnisse entwickeln.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Bürger*innen-Werkstatt","Baustellen-Exkursion / Wanderformat"],"personen":["Daniela Mitterberger","Mikhael Johanes","Gonzalo Casas","Vasiliki Kirtsou"],"notiz":"https://designplusplus.ethz.ch/research/fellowship-projects/aidriven_circular_fit_outs.html"},{"thema":"Vom Versuch zur Baubewilligung","beschreibung":"Welche Nachweise braucht ein neuartiges, digital gefertigtes Bauteil? Forschung, Planung, Handwerk und Behörden sammeln offene Fragen zu Prüfung, Dokumentation und Verantwortlichkeiten für einen Bündner Pilotbau.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Fachgespräch","Matchmaking-Apéro mit KMU"],"personen":[],"notiz":""},{"thema":"Wissen bleibt im Tal","beschreibung":"Wie wird ein Forschungsaufenthalt zu dauerhaft nutzbarem Wissen? Mit Bündner Werkstätten verständliche Bauanleitungen, offene Dateien und mehrsprachige Vermittlungsformate für kommende Origen-Projekte entwickeln.","formattyp":"Anwendungstools aus der Forschung","veranstaltungsformen":["Bürger*innen-Werkstatt","Lehrlings- und Schulformat"],"personen":[],"notiz":""}],"veranstaltungsformen":[{"name":"Vortrag","beschreibung":"Vortrag mit anschliessender Q&A Session"},{"name":"ETH-Seminarwoche","beschreibung":"Seminarwoche mit einem Lehrstuhl der ETH. Studierende können vor Ort Erfahrungen sammeln und mit unterschiedlichen Tools arbeiten. Der Output kann von der Stiftung für Bauprojekte weiterverwendet werden."},{"name":"ETH-Exkurs/Ausflug","beschreibung":"Ein- oder zweitägiger Ausflug einer ETH-Klasse. Kann Hands-on fokussiert sein oder als Think-Tank fungieren."},{"name":"Workshop (Hands-on)","beschreibung":"Workshop, um Tools aus der Forschung Besuchern näherzubringen."},{"name":"Symposium/Research-Tagung","beschreibung":"Research Conference, Podiumsdiskussionen, etc."},{"name":"LAB Retreats","beschreibung":"Retreats für Research-Institutionen und Firmen."},{"name":"Führungen","beschreibung":"z.B. Führungen durch den Weissen Turm, etc."},{"name":"MAS-Format","beschreibung":"Projekte, die in den Bergen umgesetzt werden können, oder andere Bildungsformate in Zusammenarbeit mit dem MAS an der ETH oder anderen Unis."},{"name":"Fachgespräch","beschreibung":"Podiumsdiskussionen zwischen verschiedenen Fachpersonen."},{"name":"Sommerakademie / Summer School","beschreibung":"Ein- bis zweiwöchige internationale Sommerschule: Vorlesungen am Morgen, Werkstatt am Nachmittag. Das Ergebnis bleibt als Bauteil oder Installation vor Ort."},{"name":"Hackathon / Design-Sprint (48h)","beschreibung":"Gemischte Teams aus Forschung, Bündner Betrieben und Studierenden lösen eine konkrete Aufgabe der Stiftung in zwei Tagen."},{"name":"Open LAB / Tag der offenen Werkstatt","beschreibung":"Niederschwelliger Publikumstag: Maschinen laufen, alle dürfen zuschauen, mitmachen und etwas mitnehmen."},{"name":"Residency (Researcher / Artist in Residence)","beschreibung":"Ein bis drei Monate vor Ort forschen und produzieren, Abschluss als öffentliche Präsentation. Bindet Forschende längerfristig an den Ort."},{"name":"Lehrlings- und Schulformat","beschreibung":"Halbtages- bis Tagesformat für Berufsfachschulen, Gymnasien und Lehrbetriebe aus der Region."},{"name":"Ausstellung / Installation","beschreibung":"Begleitend zur Spielzeit: Prototypen und Forschungsobjekte werden dauerhaft zugänglich gemacht und erklärt."},{"name":"Baustellen-Exkursion / Wanderformat","beschreibung":"Geführte Wanderung entlang gebauter Beispiele (Mulegns, Riom, Julier) mit Fachinput an jeder Station."},{"name":"Matchmaking-Apéro mit KMU","beschreibung":"Kurzpräsentationen von Forschenden, danach moderierte Gespräche mit Bündner Unternehmen. Andockpunkt für das GRdigital-Netzwerk."},{"name":"Bürger*innen-Werkstatt","beschreibung":"Mitwirkungsformat für die lokale Bevölkerung: Wie können digitale Werkzeuge Ortsentwicklung und Erhalt unterstützen?"},{"name":"Doktorierenden-Kolloquium / Winter School","beschreibung":"Mehrtägiges Format für PhDs mehrerer Lehrstühle, mit Peer-Review-Sessions und gemeinsamem Abendprogramm."},{"name":"Studierendenwettbewerb","beschreibung":"Ausgeschriebene Entwurfs- oder Fabrikationsaufgabe; die besten Beiträge werden vor Ort realisiert."},{"name":"Barcamp / Un-Konferenz","beschreibung":"Das Programm wird am Morgen von den Teilnehmenden selbst gesetzt. Gut geeignet für heterogene Gruppen aus Praxis und Forschung."},{"name":"Hybrid & offenes Video-Archiv","beschreibung":"Alle Vorträge werden gestreamt und als offenes Archiv publiziert – Reichweite weit über das Tal hinaus, ohne Zusatzreisen."},{"name":"Kinder- und Familienformat","beschreibung":"Robotik- und Druckwerkstatt für Kinder, parallel zum Erwachsenenprogramm. Senkt die Hürde für lokale Familien."},{"name":"Fachkurs mit Teilnahmezertifikat","beschreibung":"Zwei- bis dreitägiger Weiterbildungskurs, idealerweise gemeinsam mit ibW oder FH Graubünden anerkannt."},{"name":"Winter-Salon / Kamingespräch","beschreibung":"Kleines Abendformat, 10–15 Personen, ein Thema, keine Folien. Für Entscheidungsträger*innen und Förderpartner. (Tiny-Desk)"},{"name":"Pop-up-Werkstatt in Chur","beschreibung":"Temporäre Werkstatt im Talort, um Publikum zu erreichen, das nicht bis Riom oder Mulegns fährt."}],"teilnehmende":[{"name":"ETH Angehörige","beschreibung":"Studierende, Profs, Staff"},{"name":"Andere Uni Angehörige","beschreibung":"Studierende, Profs, Staff"},{"name":"Lokale Bevölkerung","beschreibung":"Bewohner*innen aus dem Tal Surses und den umliegenden Taeler"},{"name":"Personen aus lokalen Baufeldern","beschreibung":"Baubetriebe aus der Umgebung"},{"name":"Unternehmen/Firmen","beschreibung":"Firmen national/international"},{"name":"Lernende & Berufsfachschulen","beschreibung":"Lehrlinge aus Bau- und Planungsberufen, ibW Höhere Fachschule Südostschweiz"},{"name":"FH Graubünden & weitere Fachhochschulen","beschreibung":"Computational and Data Science, Bauingenieurwesen, Mobile Robotics, Photonics"},{"name":"Kantonale Verwaltung & Gemeinden","beschreibung":"Bauämter, Denkmalpflege GR, Amt für Wald und Naturgefahren, Gemeindeexekutiven"},{"name":"GRdigital-Netzwerk","beschreibung":"Mitglieder, Geschäftsstelle und andere geförderte Digitalisierungsprojekte im Kanton"},{"name":"Handwerk & Gewerbe","beschreibung":"Zimmereien, Steinmetze, Baumeister, Metall- und Elektrobetriebe; Bündner Gewerbeverband"},{"name":"Startups & ETH Spin-offs","beschreibung":"Materialtechnologie, Reality Capture, Robotik, Bausoftware"},{"name":"Infrastrukturbetreiber","beschreibung":"Rhätische Bahn, SBB, Bergbahnen, Elektrizitätswerke"},{"name":"Denkmalpflege & Heimatschutz","beschreibung":"Kantonale und nationale Stellen, ICOMOS, Bündner Heimatschutz"},{"name":"Tourismusorganisationen","beschreibung":"Graubünden Ferien, regionale DMOs, Hotellerie im Surses"},{"name":"Kulturpublikum der Origen-Spielzeit","beschreibung":"Besucher*innen, die wegen Theater und Musik kommen – und nebenbei Forschung sehen"},{"name":"Presse & Fachmedien","beschreibung":"Architektur-, Technik- und Regionalmedien; Wissenschaftsjournalismus"},{"name":"Internationale Forschungsgruppen","beschreibung":"TUM, ICD Stuttgart, MIT, RWTH Aachen, Princeton, TU Braunschweig"},{"name":"Förderpartner & Stiftungen","beschreibung":"Innosuisse, SNF, private Stiftungen, Sponsoren aus der Bauwirtschaft"},{"name":"Schulklassen & Familien","beschreibung":"Primar- und Sekundarstufe aus dem Surses und den angrenzenden Talschaften"},{"name":"Planungs- und Ingenieurbüros aus GR","beschreibung":"Architektur-, Bauingenieur- und Vermessungsbüros, oft ohne eigene Forschungskapazität"},{"name":"Politik & Standortförderung","beschreibung":"Kantonsparlament, Amt für Wirtschaft und Tourismus, Regionalentwicklung"}],"formattypen":[{"name":"Zukunftsmusik","beschreibung":"Was in Zukunft das Bauen prägen könnte, im Moment aber noch nicht in Anwendung ist."},{"name":"Reflexion auf Gebautes","beschreibung":"Analyse und Reflexion bereits umgesetzter Bauwerke mit digitalen Werkzeugen. Bevorzugt aus der Sammlung der Origen Stiftung, muss aber nicht zwingend – externe Beispiele sind auch spannend."},{"name":"Anwendungstools aus der Forschung","beschreibung":"Sehen und erfahren, was in der Forschung schon State of the Art ist und sich auch in der Praxis anwenden liesse."}],"programm":[]}</script>
+<script>
+/* Unveränderte Kopie der eigenen Datei – vor dem ersten Zeichnen festgehalten,
+   damit sich die Seite später mit neuen Daten selbst neu schreiben kann. */
+const SELF = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+const SEED = JSON.parse(document.getElementById('seed').textContent);
+let D = JSON.parse(JSON.stringify(SEED));
+let edit = false, tab = 'themen';
+let f = {typ:'', form:'', person:'', gruppe:'', netz:'alle', q:''};
+
+const TABS = [
+ ['themen','Themen',()=>D.themen.length],
+ ['personen','Personen',()=>D.personen.length],
+ ['formen','Veranstaltungsformen',()=>D.veranstaltungsformen.length],
+ ['teilnehmende','Teilnehmende',()=>D.teilnehmende.length],
+ ['typen','Formate',()=>D.formattypen.length],
+ ['programm','Programm',()=>D.programm.length||''],
+ ['kalender','Kalender',()=>D.programm.filter(p=>p.datum).length+D.termine.filter(t=>t.datum).length||''],
+ ['gesamt','Gesamt',()=>''],
+];
+const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const jsArg = value => esc(JSON.stringify(String(value??'')));
+
+/* Plain text stays in the data; only display text becomes a safe hyperlink. */
+function linkText(value){
+  const text=String(value??'');
+  const pattern=/\b(?:https?:\/\/|www\.)[^\s<>"']+/gi;
+  let out='',last=0;
+  for(const match of text.matchAll(pattern)){
+    let url=match[0];
+    while(/[.,;:!?]$/.test(url)) url=url.slice(0,-1);
+    for(const [open,close] of [['(',')'],['[',']'],['{','}']]){
+      while(url.endsWith(close)&&url.split(close).length>url.split(open).length) url=url.slice(0,-1);
+    }
+    out+=esc(text.slice(last,match.index));
+    const href=/^www\./i.test(url)?'https://'+url:url;
+    out+=`<a class="text-url" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(url)}</a>`;
+    last=match.index+url.length;
+  }
+  return out+esc(text.slice(last));
+}
+const linkPreview=value=>(linkText(value).match(/<a class="text-url"[\s\S]*?<\/a>/g)||[]).join('<br>');
+const editableText=value=>edit?esc(value):linkText(value);
+function refreshLinks(input){
+  const preview=input.nextElementSibling;
+  if(preview?.classList.contains('url-preview')) preview.innerHTML=linkPreview(input.value);
+}
+
+const P = n => D.personen.find(p=>p.name===n);
+const isX = n => { const p=P(n); return p?!!p.extern:false; };
+const norm = s => String(s??'').toLowerCase();
+const topicsOf = n => D.themen.filter(t=>t.personen.includes(n));
+const topicsFmt = v => D.themen.filter(t=>t.veranstaltungsformen.includes(v));
+const $ = id => document.getElementById(id);
+const slug = s => 'k'+String(s).replace(/[^a-zA-Z0-9]/g,'_');
+
+/* chip builders — Formen und Personen sehen bewusst unterschiedlich aus */
+const fmtChip = v => `<span class="fmt" onclick="goForm(${jsArg(v)})">${esc(v)}</span>`;
+const perChip = n => `<span class="per ${isX(n)?'ext':''}" onclick="goPerson(${jsArg(n)})">${esc(n)}${
+  isX(n)?'<span class="e">extern</span>':''}</span>`;
+
+function renderTabs(){
+  $('tabs').innerHTML = TABS.map(([id,l,c])=>{const n=c();
+    return `<button class="${tab===id?'on':''}" onclick="go('${id}')">${l}${
+      n!==''?`<span class="n">${n}</span>`:''}</button>`}).join('');
+}
+function go(id){tab=id;render();window.scrollTo({top:0})}
+function render(){
+  D.termine ||= [];   /* ältere Dateien kennen noch keine weiteren Termine */
+  renderTabs();
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('on'));
+  $('t-'+tab).classList.add('on');
+  ({themen:rThemen,personen:rPersonen,formen:rFormen,teilnehmende:rTeil,
+    typen:rTypen,programm:rProgramm,kalender:rKalender,gesamt:rGesamt})[tab]();
+  updateStatus();
+}
+const editBtn = extra => `<div class="bar">
+  <button class="${edit?'on':''}" onclick="edit=!edit;render()">${edit?'Bearbeiten aus':'Bearbeiten'}</button>
+  ${extra}</div>`;
+const ce = path => edit ? `contenteditable="true" onblur="setVal('${path}',this.innerText)"` : '';
+function setVal(path,val){
+  const k=path.split('.'); let o=D;
+  for(let i=0;i<k.length-1;i++) o=o[/^\d+$/.test(k[i])?+k[i]:k[i]];
+  o[k.at(-1)]=val.trim(); markDirty(); renderTabs();
+}
+function flash(sel){
+  const el=document.querySelector(sel); if(!el) return;
+  el.scrollIntoView({behavior:'smooth',block:'center'});
+  if(el.tagName==='DETAILS') el.open=true;
+  el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'),1800);
+}
+function clearQ(){f.q='';$('q').value=''}
+function goPerson(n){f.gruppe='';f.netz='alle';clearQ();go('personen');
+  setTimeout(()=>flash('#'+slug(n)),40)}
+function goTopic(n){f.typ=f.form=f.person='';clearQ();go('themen');
+  setTimeout(()=>flash('#'+slug(n)),40)}
+function goForm(n){clearQ();go('formen');setTimeout(()=>flash('#'+slug(n)),40)}
+function goTyp(n){clearQ();go('typen');setTimeout(()=>flash('#'+slug(n)),40)}
+
+/* ---------------------------------------------------------------- Themen */
+/* --- Formular für neues / bestehendes Thema --- */
+let editing=null, draft=null, pfilter='';
+function openForm(i){
+  draft = i===-1
+    ? {thema:'',beschreibung:'',formattyp:D.formattypen[0].name,veranstaltungsformen:[],personen:[],notiz:''}
+    : JSON.parse(JSON.stringify(D.themen[i]));
+  editing=i; pfilter=''; render();
+  setTimeout(()=>{const el=$('fThema'); if(el){el.focus();
+    el.scrollIntoView({behavior:'smooth',block:'center'})}},40);
+}
+function syncDraft(){
+  if(!draft) return;
+  if($('fThema')) draft.thema=$('fThema').value;
+  if($('fBesch')) draft.beschreibung=$('fBesch').value;
+  if($('fNotiz')) draft.notiz=$('fNotiz').value;
+  if($('fTyp'))   draft.formattyp=$('fTyp').value;
+}
+function togDraft(key,val){
+  syncDraft();
+  const a=draft[key], j=a.indexOf(val); j>=0?a.splice(j,1):a.push(val);
+  $('themenform').innerHTML=formHTML();
+}
+function setPfilter(v){syncDraft();pfilter=norm(v);$('themenform').innerHTML=formHTML();
+  setTimeout(()=>{const el=$('fPf');if(el){el.focus();el.setSelectionRange(99,99)}},0)}
+function saveDraft(){
+  syncDraft();
+  if(!draft.thema.trim()){alert('Bitte einen Titel eingeben.');return}
+  const title=draft.thema;
+  if(editing===-1) D.themen.unshift(draft); else D.themen[editing]=draft;
+  editing=null;draft=null;markDirty();render();
+  setTimeout(()=>flash('#'+slug(title)),40);
+}
+function formHTML(){
+  const d=draft;
+  const chosen=(arr,key,cls)=>arr.length
+    ? arr.map(v=>`<span class="${cls}" onclick="togDraft('${key}',${jsArg(v)})"
+        title="entfernen">${esc(v)}</span>`).join('')
+    : '<span class="rt">noch nichts gewählt</span>';
+  const gs=[...new Set(D.personen.map(p=>p.gruppe))];
+  return `<div class="form">
+   <h3>${editing===-1?'Neues Thema':'Thema bearbeiten'}</h3>
+   <div class="frow"><label>Thema</label>
+     <input type="text" id="fThema" value="${esc(d.thema)}" placeholder="Titel der Veranstaltung"></div>
+   <div class="frow"><label>Beschreibung</label>
+     <textarea id="fBesch" placeholder="Worum geht es?" oninput="refreshLinks(this)">${esc(d.beschreibung)}</textarea><div class="url-preview">${linkPreview(d.beschreibung)}</div></div>
+   <div class="frow"><label for="fNotiz">Notizen</label><textarea id="fNotiz" oninput="refreshLinks(this)">${esc(d.notiz)}</textarea><div class="url-preview">${linkPreview(d.notiz)}</div></div>
+   <div class="frow"><label>Format</label>
+     <select id="fTyp">${D.formattypen.map(t=>
+       `<option${t.name===d.formattyp?' selected':''}>${esc(t.name)}</option>`).join('')}</select></div>
+   <div class="frow"><label>Veranstaltungsform <span class="cnt">${
+     d.veranstaltungsformen.length} gewählt</span></label>
+     <div class="chosen">${chosen(d.veranstaltungsformen,'veranstaltungsformen','fmt')}</div>
+     <div class="picker">${D.veranstaltungsformen.map(v=>
+       `<label><input type="checkbox" ${d.veranstaltungsformen.includes(v.name)?'checked':''}
+         onchange="togDraft('veranstaltungsformen',${jsArg(v.name)})"> ${esc(v.name)}</label>`).join('')}
+     </div></div>
+   <div class="frow"><label>Personen <span class="cnt">${d.personen.length} gewählt</span></label>
+     <div class="chosen">${chosen(d.personen,'personen','per')}</div>
+     <input type="text" class="pfilter" id="fPf" value="${esc(pfilter)}" placeholder="Personen filtern"
+       oninput="setPfilter(this.value)">
+     <div class="picker">${gs.map(g=>{
+       const sub=D.personen.filter(p=>p.gruppe===g&&(!pfilter||norm(p.name+' '+p.gruppe).includes(pfilter)));
+       return sub.length?`<div class="gh">${esc(g)}</div>`+sub.map(p=>
+         `<label><input type="checkbox" ${d.personen.includes(p.name)?'checked':''}
+           onchange="togDraft('personen',${jsArg(p.name)})"> ${esc(p.name)}${
+           p.extern?' <span class="rt" style="margin:0">extern</span>':''}</label>`).join(''):''
+     }).join('')||'<span class="rt">keine Treffer</span>'}</div></div>
+   <div class="fbtns"><button class="on" onclick="saveDraft()">Speichern</button>
+     <button onclick="editing=null;draft=null;render()">Abbrechen</button></div>
+  </div>`;
+}
+
+function rThemen(){
+  const sel=(arr,cur)=>arr.map(v=>`<option${v===cur?' selected':''}>${esc(v)}</option>`).join('');
+  const gs=[...new Set(D.personen.map(p=>p.gruppe))];
+  const bar=`
+   <label>Format <select onchange="f.typ=this.value;render()"><option value="">alle</option>
+     ${sel(D.formattypen.map(t=>t.name),f.typ)}</select></label>
+   <label>Form <select onchange="f.form=this.value;render()"><option value="">alle</option>
+     ${sel(D.veranstaltungsformen.map(v=>v.name),f.form)}</select></label>
+   <label>Person <select onchange="f.person=this.value;render()"><option value="">alle</option>
+     ${gs.map(g=>`<optgroup label="${esc(g)}">`+D.personen.filter(p=>p.gruppe===g).map(p=>
+       `<option${p.name===f.person?' selected':''}>${esc(p.name)}</option>`).join('')+
+       `</optgroup>`).join('')}</select></label>
+   <button class="link" onclick="f.typ=f.form=f.person='';render()">zurücksetzen</button>
+   <button onclick="openForm(-1)">+ Thema</button>`;
+  const list=D.themen.filter(t=>
+    (!f.typ||t.formattyp===f.typ)&&(!f.form||t.veranstaltungsformen.includes(f.form))&&
+    (!f.person||t.personen.includes(f.person))&&
+    (!f.q||(norm(t.thema)+norm(t.beschreibung)+norm(t.notiz)+norm(t.personen.join(' '))).includes(f.q)));
+
+  $('t-themen').innerHTML =
+   `<div class="bar">${bar}</div>
+    <div id="themenform">${editing!==null?formHTML():''}</div>` +
+   `<p class="note">${list.length} von ${D.themen.length} Themen.
+     <span class="fmt" style="cursor:default">Veranstaltungsform</span>
+     <span class="per" style="cursor:default">Person</span>
+     <span class="per ext" style="cursor:default">gestrichelt = ausserhalb deines Netzwerks<span class="e">extern</span></span></p>` +
+   (list.length?`<div class="grid">`+list.map(t=>{const i=D.themen.indexOf(t);
+     return `<div class="card" id="${slug(t.thema)}">
+      <span class="del"><button class="link" onclick="openForm(${i})">bearbeiten</button>
+        <button class="link" onclick="delThema(${i})">✕</button></span>
+      <h3>${esc(t.thema)}</h3>
+      <div class="kind"><span class="tlink" onclick="goTyp(${jsArg(t.formattyp)})">${
+        esc(t.formattyp)}</span></div>
+      <p>${linkText(t.beschreibung)}</p>
+      <div class="row">${t.veranstaltungsformen.map(fmtChip).join('')||'<span class="rt">—</span>'}</div>
+      <div class="row">${t.personen.map(perChip).join('')||'<span class="rt">—</span>'}</div>
+      <details class="topic-notes"><summary>Notizen</summary>
+        <textarea aria-label="Notizen zu ${esc(t.thema)}" placeholder="Ideen, nächste Schritte, offene Fragen"
+          oninput="D.themen[${i}].notiz=this.value;markDirty();refreshLinks(this)">${esc(t.notiz)}</textarea><div class="url-preview">${linkPreview(t.notiz)}</div>
+      </details>
+      <button class="link" style="margin-top:8px;margin-left:-5px"
+        onclick="toProgramm(${i})">ins Programm →</button>
+     </div>`}).join('')+`</div>`
+    :`<div class="empty">Keine Themen mit diesen Filtern.</div>`);
+}
+function delThema(i){if(confirm('«'+D.themen[i].thema+'» löschen?')){
+  D.themen.splice(i,1);markDirty();render()}}
+
+/* ---------------------------------------------------------------- Personen */
+function renamePerson(i,value){
+  const person=D.personen[i];
+  if(!person) return;
+  const name=value.trim(), old=person.name;
+  if(name===old) return;
+  if(!name){alert('Bitte einen Namen eingeben.');return false}
+  if(D.personen.some((p,j)=>j!==i&&norm(p.name.trim())===norm(name))){
+    alert('Dieser Name ist bereits vorhanden. Bitte einen eindeutigen Namen verwenden.');return false;
+  }
+  person.name=name;
+  const replace=names=>names.map(n=>n===old?name:n);
+  D.themen.forEach(t=>t.personen=replace(t.personen));
+  D.programm.forEach(p=>p.personen=replace(p.personen));
+  if(draft) draft.personen=replace(draft.personen);
+  if(f.person===old) f.person=name;
+  markDirty();
+  return true;
+}
+function commitPersonName(i,input){
+  renamePerson(i,input.value);
+  input.value=D.personen[i].name;
+  const row=input.closest('details.item');
+  row.querySelector('.nm').textContent=D.personen[i].name;
+  row.id=slug(D.personen[i].name);
+  row.querySelector('[data-drag="person"]').setAttribute('aria-label',D.personen[i].name+' verschieben');
+}
+function rPersonen(){
+  const gs=[...new Set(D.personen.map(p=>p.gruppe))];
+  const bar=`
+   <label>Gruppe <select onchange="f.gruppe=this.value;render()"><option value="">alle</option>
+     ${gs.map(g=>`<option${g===f.gruppe?' selected':''}>${esc(g)}</option>`).join('')}</select></label>
+   <label>Netzwerk <select onchange="f.netz=this.value;render()">
+     ${['alle','nur Netzwerk','nur extern'].map(v=>
+       `<option${v===f.netz?' selected':''}>${v}</option>`).join('')}</select></label>
+   <button class="link" onclick="f.gruppe='';f.netz='alle';render()">zurücksetzen</button>
+   <button class="link" onclick="addPerson()">+ Person</button>`;
+  const list=D.personen.filter(p=>
+    (!f.gruppe||p.gruppe===f.gruppe)&&
+    (f.netz==='alle'||(f.netz==='nur extern')===!!p.extern)&&
+    (!f.q||(norm(p.name)+norm(p.beschreibung)+norm(p.gruppe)).includes(f.q)));
+
+  let h=editBtn(bar)+`<p class="note">${list.length} Personen, davon ${
+    list.filter(p=>p.extern).length} ausserhalb deines Netzwerks. Zeile anklicken zum Aufklappen. Unter «Bearbeiten» lassen sich Name und Beschreibung ändern. Am Griff ⠿ ziehen, um Gruppen oder Personen innerhalb einer Gruppe zu ordnen. Alternativ: Griff fokussieren und ↑ / ↓ drücken.</p>`;
+  gs.forEach(g=>{
+    const sub=list.filter(p=>p.gruppe===g); if(!sub.length) return;
+    h+=`<div class="person-group" data-group="${gs.indexOf(g)}"><div class="grouphead"><button class="link drag-handle" draggable="true" data-drag="group" data-index="${gs.indexOf(g)}" aria-label="Gruppe ${esc(g)} verschieben">⠿</button> ${esc(g)}</div>`;
+    h+=sub.map(p=>{const i=D.personen.indexOf(p);
+      const ts=topicsOf(p.name), fm=[...new Set(ts.flatMap(t=>t.veranstaltungsformen))];
+      return `<details class="item" data-person="${i}" id="${slug(p.name)}">
+       <summary><button class="link drag-handle" draggable="true" data-drag="person" data-index="${i}" aria-label="${esc(p.name)} verschieben">⠿</button><span class="nm">${esc(p.name)}</span>
+         ${p.extern?'<span class="dash"></span><span class="rt" style="margin-left:0">extern</span>':''}
+         <span class="rt">${ts.length} Thema${ts.length===1?'':'n'}</span></summary>
+       <div class="body">
+        ${edit?`<div class="frow"><label for="person-name-${i}">Name</label>
+          <input type="text" id="person-name-${i}" value="${esc(p.name)}"
+            onchange="commitPersonName(${i},this)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}"></div>`:''}
+        <p ${ce(`personen.${i}.beschreibung`)}>${editableText(p.beschreibung)||'—'}</p>
+        <p class="lab">Themen</p>
+        <div class="row">${ts.length?ts.map(t=>
+          `<span class="per" onclick="goTopic(${jsArg(t.thema)})">${esc(t.thema)}</span>`).join('')
+          :'<span class="rt">noch keinem Thema zugeordnet</span>'}</div>
+        <p class="lab" style="margin-top:14px">Passende Veranstaltungsformen</p>
+        <div class="row">${fm.length?fm.map(fmtChip).join(''):'<span class="rt">—</span>'}</div>
+        ${edit?`<button class="link" style="margin-top:12px;margin-left:-5px"
+          onclick="delPerson(${i})">Person löschen</button>`:''}
+       </div></details>`}).join('');
+    h+='</div>';
+  });
+  $('t-personen').innerHTML=h;
+  bindPersonDrag();
+}
+function movePersonEntry(kind,from,to,after=false){
+  const gs=[...new Set(D.personen.map(p=>p.gruppe))];
+  if(from===to) return;
+  if(kind==='group'){
+    const source=gs[from], target=gs[to];
+    if(source===undefined||target===undefined) return;
+    gs.splice(from,1); gs.splice(gs.indexOf(target)+(after?1:0),0,source);
+    D.personen=gs.flatMap(g=>D.personen.filter(p=>p.gruppe===g));
+  }else{
+    const source=D.personen[from],target=D.personen[to];
+    if(!source||!target||source.gruppe!==target.gruppe) return;
+    D.personen.splice(from,1);
+    D.personen.splice(D.personen.indexOf(target)+(after?1:0),0,source);
+  }
+  markDirty();render();
+}
+function bindPersonDrag(){
+  const root=$('t-personen'); let drag=null;
+  const clear=()=>root.querySelectorAll('.drop-before,.drop-after,.dragging').forEach(el=>el.classList.remove('drop-before','drop-after','dragging'));
+  root.querySelectorAll('[data-drag]').forEach(handle=>{
+    handle.onclick=e=>{e.stopPropagation();e.preventDefault()};
+    handle.onkeydown=e=>{
+      if(!['ArrowUp','ArrowDown'].includes(e.key)) return;
+      e.preventDefault();const kind=handle.dataset.drag,from=+handle.dataset.index,down=e.key==='ArrowDown';
+      const source=D.personen[from];
+      const indices=kind==='group'?[...new Set(D.personen.map(p=>p.gruppe))].map((_,i)=>i):D.personen.map((p,i)=>p.gruppe===source.gruppe?i:-1).filter(i=>i>=0);
+      const to=indices[indices.indexOf(from)+(down?1:-1)];
+      if(to===undefined)return;
+      movePersonEntry(kind,from,to,down);
+      root.querySelector(`[data-drag="${kind}"][data-index="${to}"]`)?.focus();
+    };
+    handle.ondragstart=e=>{
+      drag={kind:handle.dataset.drag,index:+handle.dataset.index};
+      e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',JSON.stringify(drag));
+      handle.closest(drag.kind==='group'?'.person-group':'details.item').classList.add('dragging');
+      e.stopPropagation();
+    };
+    handle.ondragend=()=>{drag=null;clear()};
+  });
+  root.ondragover=e=>{
+    if(!drag)return;
+    const target=e.target.closest(drag.kind==='group'?'.person-group':'[data-person]');
+    clear();if(!target)return;
+    const to=+(drag.kind==='group'?target.dataset.group:target.dataset.person);
+    if(to===drag.index||(drag.kind==='person'&&D.personen[to].gruppe!==D.personen[drag.index].gruppe))return;
+    e.preventDefault();e.dataTransfer.dropEffect='move';
+    const rect=target.getBoundingClientRect();
+    target.classList.add(e.clientY>rect.top+rect.height/2?'drop-after':'drop-before');
+  };
+  root.ondrop=e=>{
+    if(!drag)return;
+    const target=root.querySelector('.drop-before,.drop-after');if(!target)return;
+    e.preventDefault();const to=+(drag.kind==='group'?target.dataset.group:target.dataset.person);
+    const after=target.classList.contains('drop-after');
+    movePersonEntry(drag.kind,drag.index,to,after);drag=null;
+  };
+}
+
+function addPerson(){
+  const n=prompt('Name der Person oder Institution?'); if(!n) return;
+  const g=prompt('Gruppe / Lehrstuhl?',D.personen[0].gruppe)||'Ohne Gruppe';
+  const x=confirm('Ausserhalb deines Netzwerks?   OK = ja, Abbrechen = nein');
+  D.personen.push({name:n,gruppe:g,extern:x,beschreibung:''});edit=true;markDirty();render();
+  setTimeout(()=>flash('#'+slug(n)),60);
+}
+function delPerson(i){
+  const n=D.personen[i].name;
+  if(!confirm('«'+n+'» löschen? Verknüpfungen werden entfernt.')) return;
+  D.personen.splice(i,1);
+  D.themen.forEach(t=>t.personen=t.personen.filter(x=>x!==n));
+  D.programm.forEach(p=>p.personen=p.personen.filter(x=>x!==n));
+  markDirty();render();
+}
+
+/* ---------------------------------------------------------------- Formen */
+function rFormen(){
+  const list=D.veranstaltungsformen.filter(v=>!f.q||(norm(v.name)+norm(v.beschreibung)).includes(f.q));
+  $('t-formen').innerHTML=editBtn(`<button class="link" onclick="addForm()">+ Form</button>`)+
+   `<p class="note">${list.length} Veranstaltungsformen.</p>`+
+   list.map(v=>{const i=D.veranstaltungsformen.indexOf(v);
+     const ts=topicsFmt(v.name), pp=[...new Set(ts.flatMap(t=>t.personen))];
+     return `<details class="item" id="${slug(v.name)}">
+      <summary><span class="nm" ${ce(`veranstaltungsformen.${i}.name`)}>${esc(v.name)}</span>
+        <span class="rt">${ts.length} Thema${ts.length===1?'':'n'}</span></summary>
+      <div class="body">
+       <p ${ce(`veranstaltungsformen.${i}.beschreibung`)}>${editableText(v.beschreibung)}</p>
+       <p class="lab">Themen in diesem Format</p>
+       <div class="row">${ts.length?ts.map(t=>
+         `<span class="per" onclick="goTopic(${jsArg(t.thema)})">${esc(t.thema)}</span>`).join('')
+         :'<span class="rt">—</span>'}</div>
+       <p class="lab" style="margin-top:14px">Beteiligte Personen</p>
+       <div class="row">${pp.length?pp.map(perChip).join(''):'<span class="rt">—</span>'}</div>
+       ${edit?`<button class="link" style="margin-top:12px;margin-left:-5px"
+         onclick="delRow('veranstaltungsformen',${i})">löschen</button>`:''}
+      </div></details>`}).join('');
+}
+function addForm(){D.veranstaltungsformen.push({name:'Neue Form',beschreibung:''});
+  edit=true;markDirty();render()}
+function delRow(k,i){if(confirm('Eintrag löschen?')){D[k].splice(i,1);markDirty();render()}}
+
+/* ------------------------------------------------- Teilnehmende / Formate */
+function sheetView(key,el,cols,add,mk){
+  const list=D[key].filter(r=>!f.q||norm(JSON.stringify(r)).includes(f.q));
+  $(el).innerHTML=editBtn(`<button class="link" onclick="addSimple('${key}')">+ ${add}</button>`)+
+   `<table class="sheet"><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}${
+     edit?'<th></th>':''}</tr></thead><tbody>`+
+   list.map(r=>{const i=D[key].indexOf(r);return `<tr>${mk(r,i)}${
+     edit?`<td><button class="link" onclick="delRow('${key}',${i})">✕</button></td>`:''}</tr>`}).join('')+
+   `</tbody></table>`;
+}
+const rTeil=()=>sheetView('teilnehmende','t-teilnehmende',['Gruppe','Beschreibung'],'Gruppe',
+  (r,i)=>`<td style="width:27%"><span class="nm" ${ce(`teilnehmende.${i}.name`)}>${esc(r.name)}</span></td>
+    <td ${ce(`teilnehmende.${i}.beschreibung`)}>${editableText(r.beschreibung)||'—'}</td>`);
+function rTypen(){
+  const list=D.formattypen.filter(t=>!f.q||(norm(t.name)+norm(t.beschreibung)).includes(f.q));
+  $('t-typen').innerHTML=editBtn(`<button class="link" onclick="addSimple('formattypen')">+ Format</button>`)+
+   `<p class="note">Die drei Grundformate. Aufklappen zeigt, welche Themen dahinterstehen.</p>`+
+   list.map(t=>{const i=D.formattypen.indexOf(t);
+     const ts=D.themen.filter(x=>x.formattyp===t.name);
+     const fm=[...new Set(ts.flatMap(x=>x.veranstaltungsformen))];
+     const pp=[...new Set(ts.flatMap(x=>x.personen))];
+     return `<details class="item" id="${slug(t.name)}">
+      <summary><span class="nm" ${ce(`formattypen.${i}.name`)}>${esc(t.name)}</span>
+        <span class="rt">${ts.length} Thema${ts.length===1?'':'n'}</span></summary>
+      <div class="body">
+       <p ${ce(`formattypen.${i}.beschreibung`)}>${editableText(t.beschreibung)}</p>
+       <p class="lab">Themen in diesem Format</p>
+       <div class="row">${ts.length?ts.map(x=>
+         `<span class="per" onclick="goTopic(${jsArg(x.thema)})">${esc(x.thema)}</span>`).join('')
+         :'<span class="rt">—</span>'}</div>
+       <p class="lab" style="margin-top:14px">Passende Veranstaltungsformen</p>
+       <div class="row">${fm.length?fm.map(fmtChip).join(''):'<span class="rt">—</span>'}</div>
+       <p class="lab" style="margin-top:14px">Beteiligte Personen (${pp.length})</p>
+       <div class="row">${pp.length?pp.map(perChip).join(''):'<span class="rt">—</span>'}</div>
+       ${edit?`<button class="link" style="margin-top:12px;margin-left:-5px"
+         onclick="delRow('formattypen',${i})">löschen</button>`:''}
+      </div></details>`}).join('');
+}
+function addSimple(k){
+  D[k].push({name:k==='formattypen'?'Neues Format':'Neue Gruppe',beschreibung:''});
+  edit=true;markDirty();render();
+}
+
+/* ---------------------------------------------------------------- Programm */
+function addToProgramm(i,datum=''){
+  const t=D.themen[i];
+  D.programm.push({thema:t.thema,veranstaltungsform:t.veranstaltungsformen[0]||'',
+    personen:[...t.personen],zielgruppen:[],datum,zeit:'',ende:'',notiz:''});
+  markDirty();
+}
+function toProgramm(i){addToProgramm(i);go('programm')}
+const progKey = p => p.datum ? p.datum+' '+(p.zeit||'') : '';
+function sortProgramm(){
+  D.programm.sort((a,b)=>{const x=progKey(a),y=progKey(b);
+    return x&&y?x.localeCompare(y):x?-1:y?1:0});
+}
+function rProgramm(){
+  sortProgramm();
+  const pr=D.programm;
+  if(!pr.length){$('t-programm').innerHTML=`<div class="empty">
+    Noch nichts zusammengestellt.<br><br>Bei den Themen auf «ins Programm →» klicken.<br><br>
+    <button onclick="go('themen')">Zu den Themen</button></div>`;return}
+  const all=[...new Set(pr.flatMap(p=>p.personen))], ext=all.filter(isX);
+  $('t-programm').innerHTML=
+   `<div class="bar"><button class="link" onclick="exportCSV()">CSV</button>
+     <button class="link" onclick="window.print()">Drucken</button>
+     <button class="link" onclick="if(confirm('Programm leeren?')){D.programm=[];markDirty();render()}">leeren</button></div>
+    <p class="note">Chronologisch nach Termin; undatierte Veranstaltungen folgen am Ende. Pfeile ordnen Einträge ohne Termin oder mit gleichem Datum.</p>
+    <div class="stats">
+     <div class="stat"><div class="big">${pr.length}</div><div class="lbl">Veranstaltungen</div></div>
+     <div class="stat"><div class="big">${all.length}</div><div class="lbl">Personen</div></div>
+     <div class="stat"><div class="big">${ext.length}</div><div class="lbl">davon extern</div></div>
+     <div class="stat"><div class="big">${
+       new Set(pr.map(p=>p.veranstaltungsform).filter(Boolean)).size}</div>
+       <div class="lbl">Formen</div></div>
+    </div>`+
+   pr.map((p,i)=>{const t=D.themen.find(t=>t.thema===p.thema);
+    return `<div class="prog" id="prog${i}">
+     <div class="pn">${i+1}<div style="margin-top:8px">
+       <button class="link" onclick="mv(${i},-1)">↑</button><br>
+       <button class="link" onclick="mv(${i},1)">↓</button><br>
+       <button class="link" onclick="D.programm.splice(${i},1);markDirty();render()">✕</button></div></div>
+     <div>
+      <h3 style="margin:0 0 3px;font-size:15px">${esc(p.thema)}</h3>
+      <div class="kind" style="font-size:11.5px;color:var(--faint);margin-bottom:10px">${
+        t?esc(t.formattyp):''}</div>
+      ${t?`<p style="font-size:13px;color:var(--mute);margin:0 0 12px;max-width:640px">${
+        linkText(t.beschreibung)}</p>`:''}
+      <div class="bar" style="margin-bottom:14px">
+        <label>Form <select onchange="D.programm[${i}].veranstaltungsform=this.value;markDirty();render()">
+          <option value="">—</option>${D.veranstaltungsformen.map(v=>
+          `<option${v.name===p.veranstaltungsform?' selected':''}>${esc(v.name)}</option>`).join('')}
+        </select></label>
+        <label>Termin <input type="date" value="${esc(p.datum)}"
+          onchange="D.programm[${i}].datum=this.value;sortProgramm();markDirty();render()"></label>
+        <label>Zeit <input type="time" value="${esc(p.zeit)}"
+          onchange="D.programm[${i}].zeit=this.value;sortProgramm();markDirty();render()"></label>
+        <label>bis <input type="time" value="${esc(p.ende)}"
+          onchange="D.programm[${i}].ende=this.value;markDirty()"></label>
+        ${p.datum?`<button class="link" onclick="showInCal(${jsArg(p.datum)})">im Kalender →</button>`:''}
+      </div>
+      <p class="lab">Referent*innen</p>
+      <div class="row">${p.personen.map(n=>`<span class="per ${isX(n)?'ext':''}"
+        onclick="D.programm[${i}].personen=D.programm[${i}].personen.filter(x=>x!==${jsArg(n)});markDirty();render()"
+        title="entfernen">${esc(n)}${isX(n)?'<span class="e">extern</span>':''}</span>`).join('')
+        ||'<span class="rt">—</span>'}</div>
+      <details><summary class="more">Personen wählen</summary>
+        <div class="picker">${pickerHTML(i)}</div></details>
+      <p class="lab" style="margin-top:16px">Zielgruppen</p>
+      <div class="row">${p.zielgruppen.map(z=>`<span class="per"
+        onclick="D.programm[${i}].zielgruppen=D.programm[${i}].zielgruppen.filter(x=>x!==${jsArg(z)});markDirty();render()"
+        >${esc(z)}</span>`).join('')||'<span class="rt">—</span>'}</div>
+      <details><summary class="more">Zielgruppen wählen</summary>
+        <div class="picker">${D.teilnehmende.map(z=>`<label><input type="checkbox" ${
+          p.zielgruppen.includes(z.name)?'checked':''}
+          onchange="tog(${i},'zielgruppen',${jsArg(z.name)})"> ${esc(z.name)}</label>`).join('')}
+        </div></details>
+      <p class="lab" style="margin-top:16px">Notiz</p>
+      <textarea style="width:100%;max-width:640px;min-height:46px" placeholder="Ort, Budget, Ansprechperson"
+        oninput="D.programm[${i}].notiz=this.value;markDirty();refreshLinks(this)">${esc(p.notiz)}</textarea><div class="url-preview">${linkPreview(p.notiz)}</div>
+     </div></div>`}).join('');
+}
+function pickerHTML(i){
+  return [...new Set(D.personen.map(p=>p.gruppe))].map(g=>
+    `<div class="gh">${esc(g)}</div>`+D.personen.filter(p=>p.gruppe===g).map(p=>
+      `<label><input type="checkbox" ${D.programm[i].personen.includes(p.name)?'checked':''}
+        onchange="tog(${i},'personen',${jsArg(p.name)})"> ${esc(p.name)}</label>`).join('')).join('');
+}
+function tog(i,k,v){const a=D.programm[i][k];const j=a.indexOf(v);
+  j>=0?a.splice(j,1):a.push(v);markDirty();render()}
+function mv(i,d){const j=i+d;if(j<0||j>=D.programm.length)return;
+  if(progKey(D.programm[i])!==progKey(D.programm[j]))return;
+  [D.programm[i],D.programm[j]]=[D.programm[j],D.programm[i]];markDirty();render()}
+
+/* ---------------------------------------------------------------- Kalender */
+/* Aufgebaut wie Google Kalender: Tag, Woche, Monat. Zwei Arten von Einträgen:
+   Veranstaltungen aus dem Programm (kind 'p') und weitere Termine wie Deadlines
+   oder Sitzungen (kind 'o', in D.termine). Themen (kind 't') lassen sich in den
+   Kalender ziehen und landen so im Programm. Ohne Uhrzeit gilt ein Eintrag als ganztägig. */
+const MONATE=['Januar','Februar','März','April','Mai','Juni','Juli','August','September',
+  'Oktober','November','Dezember'];
+const WT=['Mo','Di','Mi','Do','Fr','Sa','So'];
+const FARBEN={blau:'#3b6788',grün:'#3f7356',ocker:'#9a6a1c',violett:'#6a4c86',rot:'#b3412f',grau:'#6b645e'};
+const HOUR=48, SNAP=15;   /* Pixel pro Stunde, Raster in Minuten */
+const monthOf = d => new Date(d.getFullYear(),d.getMonth(),1);
+const addDays = (d,n) => new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);
+const weekStart = d => addDays(d,-((d.getDay()+6)%7));
+const parseDay = s => new Date(s+'T00:00');
+const isoDay = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${
+  String(d.getDate()).padStart(2,'0')}`;
+const isoWeek = d => {const t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+  t.setUTCDate(t.getUTCDate()+4-(t.getUTCDay()||7));
+  return Math.ceil(((t-Date.UTC(t.getUTCFullYear(),0,1))/864e5+1)/7)};
+const toMin = s => /^\d\d:\d\d/.test(s||'') ? +s.slice(0,2)*60 + +s.slice(3,5) : null;
+const toHM = m => {m=Math.max(0,Math.min(1439,Math.round(m)));
+  return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')};
+const snap = m => Math.round(m/SNAP)*SNAP;
+const nowMin = () => {const d=new Date();return d.getHours()*60+d.getMinutes()};
+/* Dauer in Minuten; ohne gültiges Ende eine Stunde */
+const dur = o => {const s=toMin(o.zeit), e=toMin(o.ende); return s!==null&&e!==null&&e>s ? e-s : 60};
+const evColor = e => e.kind==='p' ? 'var(--accent)' : FARBEN[e.farbe]||FARBEN.blau;
+const getEv = (kind,i) => kind==='p' ? D.programm[i] : kind==='o' ? D.termine[i] : null;
+const byStart = (a,b) => (toMin(a.zeit)??-1)-(toMin(b.zeit)??-1) || dur(b)-dur(a);
+
+let calView = (()=>{try{return localStorage.getItem('origen-cal-view')||'week'}catch(e){return 'week'}})();
+let calDate = parseDay(isoDay(new Date())), calMini = monthOf(calDate), calScroll = null, evEdit = null;
+
+function setCalDate(d){calDate=d;calMini=monthOf(d)}
+function calGo(view,ds){
+  if(view){calView=view;try{localStorage.setItem('origen-cal-view',view)}catch(e){}}
+  if(ds) setCalDate(parseDay(ds));
+  render();
+}
+function calShift(n){
+  if(!n) setCalDate(parseDay(isoDay(new Date())));
+  else if(calView==='month') setCalDate(new Date(calDate.getFullYear(),calDate.getMonth()+n,1));
+  else setCalDate(addDays(calDate,n*(calView==='week'?7:1)));
+  render();
+}
+function miniShift(n){calMini=new Date(calMini.getFullYear(),calMini.getMonth()+n,1);render()}
+function showInCal(datum){setCalDate(parseDay(datum));go('kalender')}
+function calEvents(){
+  return [
+    ...D.programm.map((p,i)=>({kind:'p',i,titel:p.thema,datum:p.datum,zeit:p.zeit,ende:p.ende,
+      text:p.thema+' '+p.notiz+' '+p.personen.join(' ')})),
+    ...D.termine.map((t,i)=>({kind:'o',i,titel:t.titel,datum:t.datum,zeit:t.zeit,ende:t.ende,
+      farbe:t.farbe,text:t.titel+' '+(t.ort||'')+' '+t.notiz})),
+  ].filter(e=>!f.q||norm(e.text).includes(f.q));
+}
+function calTitle(days){
+  if(calView==='month') return MONATE[calDate.getMonth()]+' '+calDate.getFullYear();
+  const a=days[0], b=days.at(-1);
+  if(calView==='day') return a.toLocaleDateString('de-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  if(a.getMonth()===b.getMonth()) return MONATE[a.getMonth()]+' '+a.getFullYear();
+  return MONATE[a.getMonth()].slice(0,3)+(a.getFullYear()!==b.getFullYear()?' '+a.getFullYear():'')+
+    ' – '+MONATE[b.getMonth()].slice(0,3)+' '+b.getFullYear();
+}
+
+const evChip = (e,dot) => `<div class="ev ${e.kind}${dot&&e.zeit?' dot':''}" data-ev="${e.kind}:${e.i}"
+  tabindex="0" role="button" style="--c:${evColor(e)}" title="${esc(e.titel)}">${
+  dot&&e.zeit?`<span class="tm">${esc(e.zeit)}</span>`:''}${esc(e.titel)||'(ohne Titel)'}</div>`;
+function evBlock(e,{col,n}){
+  const s=toMin(e.zeit), d=dur(e);
+  return `<div class="blk ${e.kind}${d<45?' short':''}" data-ev="${e.kind}:${e.i}" tabindex="0" role="button"
+    title="${esc(e.titel)}, ${esc(e.zeit)} – ${toHM(s+d)}"
+    style="--c:${evColor(e)};top:${s/60*HOUR+1}px;height:${Math.max(d/60*HOUR-3,16)}px;
+      left:calc(${col*100/n}% + 2px);width:calc(${100/n}% - 6px)">
+    <div class="bt">${esc(e.titel)||'(ohne Titel)'}</div><div class="bm">${esc(e.zeit)} – ${toHM(s+d)}</div>
+    <div class="rz"></div></div>`;
+}
+/* Überlappende Termine teilen sich die Spaltenbreite, wie bei Google */
+function layout(list){
+  const out=new Map(); let group=[], ends=[], groupEnd=-1;
+  const flush=()=>{group.forEach(g=>out.set(g.e,{col:g.col,n:ends.length}));group=[];ends=[];groupEnd=-1};
+  list.forEach(e=>{
+    const s=toMin(e.zeit), en=s+dur(e);
+    if(group.length&&s>=groupEnd) flush();
+    let col=ends.findIndex(x=>x<=s);
+    if(col<0){col=ends.length;ends.push(en)} else ends[col]=en;
+    group.push({e,col}); groupEnd=Math.max(groupEnd,en);
+  });
+  flush(); return out;
+}
+function rTimeGrid(days,evs){
+  const today=isoDay(new Date());
+  const on=d=>evs.filter(e=>e.datum===isoDay(d)).sort(byStart);
+  return `<div class="tg" style="--n:${days.length}">
+    <div class="tg-row tg-head"><div class="gut">${calView==='week'?'KW '+isoWeek(days[0]):''}</div>${
+      days.map(d=>{const ds=isoDay(d);
+      return `<div class="tg-dh${ds===today?' today':''}"><span class="dw">${WT[(d.getDay()+6)%7]}</span>
+        <button class="dnum" onclick="calGo('day','${ds}')"
+          aria-label="${d.toLocaleDateString('de-CH')} als Tag anzeigen">${d.getDate()}</button></div>`}).join('')}</div>
+    <div class="tg-row tg-all"><div class="gut">ganztägig</div>${days.map(d=>
+      `<div class="ad-cell" data-date="${isoDay(d)}" data-allday="">${
+        on(d).filter(e=>!e.zeit).map(e=>evChip(e)).join('')}</div>`).join('')}</div>
+    <div class="tg-scroll" id="tgScroll"><div class="tg-row" style="height:${24*HOUR}px">
+      <div class="gut hours">${[...Array(24)].map((_,h)=>h?
+        `<span style="top:${h*HOUR}px">${String(h).padStart(2,'0')}:00</span>`:'').join('')}</div>
+      ${days.map(d=>{const ds=isoDay(d), list=on(d).filter(e=>e.zeit), lay=layout(list);
+        return `<div class="tg-col${ds===today?' today':''}" data-col="${ds}">${
+          list.map(e=>evBlock(e,lay.get(e))).join('')}${
+          ds===today?`<div class="now" style="top:${nowMin()/60*HOUR}px"></div>`:''}</div>`}).join('')}
+    </div></div></div>`;
+}
+function rMonth(evs){
+  const y=calDate.getFullYear(), m=calDate.getMonth(), today=isoDay(new Date());
+  const lead=(new Date(y,m,1).getDay()+6)%7, weeks=Math.ceil((lead+new Date(y,m+1,0).getDate())/7);
+  const byDay={}; evs.filter(e=>e.datum).forEach(e=>(byDay[e.datum]||=[]).push(e));
+  let h=WT.map(w=>`<div class="dow">${w}</div>`).join('');
+  for(let k=0;k<weeks*7;k++){
+    const d=new Date(y,m,1-lead+k), ds=isoDay(d), list=(byDay[ds]||[]).sort(byStart);
+    const max=list.length>4?3:4;
+    h+=`<div class="mday${d.getMonth()!==m?' out':''}${ds===today?' today':''}" data-date="${ds}" data-mday="">
+      <button class="dn" onclick="calGo('day','${ds}')">${d.getDate()===1?
+        '1. '+MONATE[d.getMonth()].slice(0,3):d.getDate()}</button>
+      ${list.slice(0,max).map(e=>evChip(e,true)).join('')}${list.length>max?
+        `<button class="link more" onclick="calGo('day','${ds}')">+${list.length-max} weitere</button>`:''}</div>`;
+  }
+  return `<div class="mg">${h}</div>`;
+}
+function miniMonth(evs){
+  const y=calMini.getFullYear(), m=calMini.getMonth(), lead=(new Date(y,m,1).getDay()+6)%7;
+  const today=isoDay(new Date()), sel=isoDay(calDate), has=new Set(evs.map(e=>e.datum).filter(Boolean));
+  const wk=new Set(calView==='week'?[...Array(7)].map((_,k)=>isoDay(addDays(weekStart(calDate),k))):[]);
+  let g=WT.map(w=>`<span>${w[0]}</span>`).join('');
+  for(let k=0;k<42;k++){const d=new Date(y,m,1-lead+k), ds=isoDay(d);
+    g+=`<button class="${d.getMonth()!==m?'out ':''}${ds===today?'today ':ds===sel?'sel ':wk.has(ds)?'wk ':''}${
+      has.has(ds)?'has':''}" onclick="calGo(null,'${ds}')" aria-label="${d.toLocaleDateString('de-CH')}">${
+      d.getDate()}</button>`}
+  return `<div class="mini"><div class="mini-h"><b>${MONATE[m]} ${y}</b><span>
+    <button onclick="miniShift(-1)" aria-label="Vorheriger Monat">‹</button><button
+      onclick="miniShift(1)" aria-label="Nächster Monat">›</button></span></div>
+    <div class="mini-g">${g}</div></div>`;
+}
+function rKalender(){
+  sortProgramm();
+  const sc=$('tgScroll'); if(sc) calScroll=sc.scrollTop;
+  const evs=calEvents();
+  const days=calView==='day'?[calDate]:[...Array(7)].map((_,k)=>addDays(weekStart(calDate),k));
+  const planned=new Set(D.programm.map(p=>p.thema));
+  const themen=D.themen.filter(t=>!planned.has(t.thema)&&(!f.q||norm(t.thema).includes(f.q)));
+  $('t-kalender').innerHTML=`<div class="gc-top">
+      <button onclick="calShift(0)" title="Taste T">Heute</button>
+      <button class="icon" onclick="calShift(-1)" aria-label="Zurück" title="Taste P">‹</button>
+      <button class="icon" onclick="calShift(1)" aria-label="Weiter" title="Taste N">›</button>
+      <h2>${calTitle(days)}</h2>
+      <span class="seg">${[['day','Tag','D'],['week','Woche','W'],['month','Monat','M']].map(([v,l,k])=>
+        `<button class="${calView===v?'on':''}" onclick="calGo('${v}')" title="Taste ${k}">${l}</button>`).join('')}</span>
+    </div>
+    <div class="gc-body">
+      <aside class="gc-side">
+        <button class="create" onclick="openEv('o',-1,{datum:isoDay(calDate)})" title="Taste C">+ Erstellen</button>
+        ${miniMonth(evs)}
+        <p class="lab">Ohne Termin</p>
+        <div class="pool" data-pool="">${evs.filter(e=>!e.datum).map(e=>evChip(e)).join('')||
+          '<span class="rt">Hierher ziehen, um das Datum zu entfernen.</span>'}</div>
+        <p class="lab" style="margin-top:20px">Themen, noch nicht im Programm</p>
+        <div class="pool themes">${themen.map(t=>evChip({kind:'t',i:D.themen.indexOf(t),titel:t.thema})).join('')||
+          '<span class="rt">—</span>'}</div>
+        <p class="note" style="margin:6px 0 0">In den Kalender ziehen, um es ins Programm aufzunehmen.</p>
+        <div class="legend"><span class="ev" style="--c:var(--accent)">Programm</span>
+          <span class="ev" style="--c:${FARBEN.blau}">Weiterer Termin</span><span class="ev t">Thema</span></div>
+      </aside>
+      <div class="gc-main">${calView==='month'?rMonth(evs):rTimeGrid(days,evs)}</div>
+    </div>`;
+  const s=$('tgScroll');
+  if(s){
+    s.scrollTop=calScroll??7*HOUR;
+    const pad=s.offsetWidth-s.clientWidth+'px';   /* Spalten trotz Scrollbalken bündig */
+    document.querySelectorAll('.tg-head,.tg-all').forEach(r=>r.style.paddingRight=pad);
+  }
+  bindCal();
+}
+
+/* --- Ziehen: verschieben, Länge ändern, neu aufziehen (Pointer Events, auch für Touch) --- */
+let suppressClick=false;
+function bindCal(){
+  const root=$('t-kalender');
+  root.querySelectorAll('[data-ev]').forEach(el=>{
+    el.onpointerdown=e=>startDrag(e,el);
+    el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();evClick(el.dataset.ev)}};
+  });
+  root.querySelectorAll('[data-col]').forEach(col=>col.onpointerdown=e=>{if(e.target===col)startCreate(e,col)});
+  root.querySelectorAll('[data-allday],[data-mday]').forEach(c=>c.onclick=e=>{
+    if(e.target===c&&!suppressClick) openEv('o',-1,{datum:c.dataset.date})});
+}
+function evClick(key){
+  const [kind,i]=key.split(':');
+  kind==='t'?goTopic(D.themen[+i].thema):openEv(kind,+i);
+}
+function dragListen(move,up,cancel){
+  const off=()=>{removeEventListener('pointermove',move);removeEventListener('pointerup',u);
+    removeEventListener('pointercancel',c)};
+  const u=e=>{off();up(e)}, c=e=>{off();cancel(e)};
+  addEventListener('pointermove',move);addEventListener('pointerup',u);addEventListener('pointercancel',c);
+}
+function endDragUI(){
+  document.querySelectorAll('.ghost,.blk.preview').forEach(x=>x.remove());
+  document.querySelectorAll('#t-kalender .over,#t-kalender .dragging')
+    .forEach(x=>x.classList.remove('over','dragging'));
+  document.body.classList.remove('cal-dragging');
+  suppressClick=true;setTimeout(()=>suppressClick=false,0);
+}
+function autoScroll(e){
+  const s=$('tgScroll'); if(!s) return; const r=s.getBoundingClientRect();
+  if(e.clientX<r.left||e.clientX>r.right) return;
+  if(e.clientY<r.top+36) s.scrollTop-=14; else if(e.clientY>r.bottom-36) s.scrollTop+=14;
+}
+function previewBlock(col,s,d,titel,color){
+  let p=document.querySelector('.blk.preview');
+  if(!p){p=document.createElement('div');p.className='blk preview'}
+  if(p.parentElement!==col) col.appendChild(p);
+  p.style.cssText=`--c:${color};top:${s/60*HOUR+1}px;height:${Math.max(d/60*HOUR-3,16)}px;left:2px;right:6px`;
+  p.classList.toggle('short',d<45);
+  p.innerHTML=`<div class="bt">${esc(titel)||'(ohne Titel)'}</div><div class="bm">${toHM(s)} – ${toHM(s+d)}</div>`;
+}
+function dropTarget(x,y,kind,grab,d){
+  const el=document.elementFromPoint(x,y); if(!el) return null;
+  const col=el.closest('[data-col]');
+  if(col){const r=col.getBoundingClientRect();
+    return {type:'col',date:col.dataset.col,node:col,
+      min:Math.max(0,Math.min(1440-d,snap((y-r.top)/HOUR*60-grab)))}}
+  const cell=el.closest('[data-date]');
+  if(cell) return {type:cell.dataset.allday!==undefined?'allday':'day',date:cell.dataset.date,node:cell};
+  const pool=el.closest('[data-pool]');
+  return pool&&kind!=='t' ? {type:'pool',node:pool} : null;
+}
+function startDrag(e,el){
+  if(e.button!==0) return;
+  e.preventDefault();
+  const [kind,is]=el.dataset.ev.split(':'), i=+is, o=getEv(kind,i);
+  const titel=o?(o.titel??o.thema):D.themen[i].thema;
+  const color=kind==='t'?FARBEN.grau:evColor({kind,farbe:o.farbe});
+  const resize=e.target.classList.contains('rz');
+  const d0=o&&toMin(o.zeit)!==null?dur(o):60;
+  /* wo im Block angefasst wurde, damit er beim Ziehen nicht springt */
+  const grab=el.classList.contains('blk')&&!resize?snap((e.clientY-el.getBoundingClientRect().top)/HOUR*60):0;
+  const x0=e.clientX, y0=e.clientY;
+  let moved=false, ghost=null, drop=null, newEnd=null;
+  dragListen(ev=>{
+    if(!moved){if(Math.hypot(ev.clientX-x0,ev.clientY-y0)<5) return;
+      moved=true;document.body.classList.add('cal-dragging');if(!resize)el.classList.add('dragging')}
+    autoScroll(ev);
+    if(resize){
+      const r=el.parentElement.getBoundingClientRect(), s=toMin(o.zeit);
+      newEnd=Math.max(s+SNAP,Math.min(1440,snap((ev.clientY-r.top)/HOUR*60)));
+      previewBlock(el.parentElement,s,newEnd-s,titel,color);return;
+    }
+    document.querySelectorAll('#t-kalender .over').forEach(x=>x.classList.remove('over'));
+    drop=dropTarget(ev.clientX,ev.clientY,kind,grab,d0);
+    if(drop?.type==='col'){
+      if(ghost) ghost.style.display='none';
+      previewBlock(drop.node,drop.min,d0,titel,color);
+    }else{
+      document.querySelector('.blk.preview')?.remove();
+      if(!ghost){ghost=document.createElement('div');ghost.className='ev ghost'+(kind==='t'?' t':'');
+        ghost.style.setProperty('--c',color);ghost.textContent=titel||'(ohne Titel)';document.body.appendChild(ghost)}
+      ghost.style.display='';ghost.style.left=ev.clientX+10+'px';ghost.style.top=ev.clientY+8+'px';
+      drop?.node.classList.add('over');
+    }
+  },()=>{
+    endDragUI();
+    if(!moved){evClick(el.dataset.ev);return}
+    if(resize){if(newEnd!==null){o.ende=toHM(newEnd);markDirty()}render();return}
+    if(drop) applyDrop(kind,i,drop,d0); else render();
+  },()=>{endDragUI();render()});
+}
+function applyDrop(kind,i,t,d){
+  let o=getEv(kind,i);
+  if(kind==='t'){addToProgramm(i);o=D.programm.at(-1)}
+  if(t.type==='pool') o.datum='';
+  else{
+    o.datum=t.date;
+    if(t.type==='col'){o.zeit=toHM(t.min);o.ende=toHM(t.min+d)}
+    else if(t.type==='allday'){o.zeit='';o.ende=''}
+  }
+  markDirty();render();
+}
+/* Im leeren Raster klicken oder aufziehen legt einen neuen Termin an */
+function startCreate(e,col){
+  if(e.button!==0) return;
+  const mouse=e.pointerType==='mouse'; if(mouse) e.preventDefault();
+  const top=()=>col.getBoundingClientRect().top;
+  const s0=Math.max(0,Math.min(1440-SNAP,Math.floor((e.clientY-top())/HOUR*60/SNAP)*SNAP));
+  let a=s0, b=Math.min(1440,s0+60), moved=false; const y0=e.clientY;
+  dragListen(ev=>{
+    if(!mouse||(!moved&&Math.abs(ev.clientY-y0)<5)) return;
+    moved=true;document.body.classList.add('cal-dragging');autoScroll(ev);
+    const cur=Math.max(0,Math.min(1440,snap((ev.clientY-top())/HOUR*60)));
+    a=Math.min(s0,cur);b=Math.max(s0+SNAP,cur);
+    previewBlock(col,a,b-a,'',FARBEN.blau);
+  },()=>{
+    document.body.classList.remove('cal-dragging');
+    previewBlock(col,a,b-a,'',FARBEN.blau);
+    openEv('o',-1,{datum:col.dataset.col,zeit:toHM(a),ende:toHM(b)});
+  },()=>document.querySelector('.blk.preview')?.remove());
+}
+
+/* --- Detail-Dialog; i=-1 legt einen neuen weiteren Termin an --- */
+function openEv(kind,i,preset={}){
+  evEdit={kind,i};
+  const o = kind==='p' ? D.programm[i]
+    : i===-1 ? {titel:'',datum:'',zeit:'',ende:'',ort:'',notiz:'',farbe:'blau',...preset} : D.termine[i];
+  const t = kind==='p' && D.themen.find(t=>t.thema===o.thema);
+  const ganz=!o.zeit, end=o.zeit?toHM(toMin(o.zeit)+dur(o)):'';
+  $('evdlg').innerHTML=`<form onsubmit="event.preventDefault();saveEv()">
+    ${kind==='p'
+      ? `<h3>${esc(o.thema)}</h3><div class="kind" style="font-size:11.5px;color:var(--faint);
+          margin-bottom:16px">Programm${t?' · '+esc(t.formattyp):''}${
+          o.veranstaltungsform?' · '+esc(o.veranstaltungsform):''}</div>`
+      : `<h3 style="margin-bottom:16px">${i===-1?'Neuer Termin':'Termin bearbeiten'}</h3>
+         <div class="frow"><label for="eTitel">Titel</label>
+           <input type="text" id="eTitel" value="${esc(o.titel)}" placeholder="z.B. Eingabefrist, Sitzung"></div>`}
+    <div class="two">
+      <div class="frow" style="flex:1.4"><label for="eDatum">Datum</label>
+        <input type="date" id="eDatum" value="${esc(o.datum)}"></div>
+      <div class="frow"><label for="eZeit">Von</label>
+        <input type="time" id="eZeit" value="${esc(o.zeit)}"${ganz?' disabled':''}></div>
+      <div class="frow"><label for="eEnde">Bis</label>
+        <input type="time" id="eEnde" value="${end}"${ganz?' disabled':''}></div>
+    </div>
+    <label class="chk"><input type="checkbox" id="eGanz"${ganz?' checked':''}
+      onchange="toggleGanz(this.checked)"> Ganztägig</label>
+    ${kind==='o'?`<div class="frow"><label for="eOrt">Ort</label>
+      <input type="text" id="eOrt" value="${esc(o.ort)}"></div>
+      <div class="frow"><label>Farbe</label><div class="sw">${Object.entries(FARBEN).map(([n,c])=>
+        `<label class="swl" title="${n}"><input type="radio" name="eFarbe" value="${n}" aria-label="${n}"${
+          (o.farbe||'blau')===n?' checked':''}><span style="background:${c}"></span></label>`).join('')}</div></div>`:''}
+    <div class="frow"><label for="eNotiz">Notiz</label>
+      <textarea id="eNotiz" oninput="refreshLinks(this)">${esc(o.notiz)}</textarea><div class="url-preview">${
+        linkPreview(o.notiz)}</div></div>
+    <div class="fbtns"><button class="on" type="submit">Speichern</button>
+      <button type="button" onclick="$('evdlg').close()">Abbrechen</button>
+      <span style="margin-left:auto"></span>
+      ${kind==='p'?`<button type="button" class="link" onclick="$('evdlg').close();go('programm');
+          setTimeout(()=>flash('#prog${i}'),40)">im Programm →</button>`
+        :i!==-1?`<button type="button" class="link" onclick="delTermin(${i})">löschen</button>`:''}
+    </div></form>`;
+  $('evdlg').showModal();
+  setTimeout(()=>{if($('evdlg').open)($('eTitel')||$('eDatum')).focus()},0);
+}
+function toggleGanz(on){
+  $('eZeit').disabled=$('eEnde').disabled=on;
+  if(!on&&!$('eZeit').value){$('eZeit').value='09:00';$('eEnde').value='10:00'}
+}
+function saveEv(){
+  const {kind,i}=evEdit, v=id=>$(id)?$(id).value:'';
+  const ganz=$('eGanz').checked||!v('eZeit');
+  const vals={datum:v('eDatum'),zeit:ganz?'':v('eZeit'),ende:'',notiz:v('eNotiz')};
+  if(!ganz){const s=toMin(vals.zeit), e=toMin(v('eEnde'));vals.ende=toHM(e!==null&&e>s?e:s+60)}
+  if(kind==='o'){
+    Object.assign(vals,{titel:v('eTitel').trim(),ort:v('eOrt').trim(),
+      farbe:document.querySelector('input[name=eFarbe]:checked')?.value||'blau'});
+    if(i===-1) D.termine.push(vals); else Object.assign(D.termine[i],vals);
+  } else Object.assign(D.programm[i],vals);
+  if(vals.datum) setCalDate(parseDay(vals.datum));
+  $('evdlg').close();markDirty();render();
+}
+function delTermin(i){
+  if(!confirm('«'+(D.termine[i].titel||'Termin')+'» löschen?')) return;
+  D.termine.splice(i,1);$('evdlg').close();markDirty();render();
+}
+/* Schliessen ohne Speichern entfernt auch die Vorschau eines neu aufgezogenen Termins */
+$('evdlg').addEventListener('close',()=>{
+  if($('evdlg').contains(document.activeElement)) document.activeElement.blur();
+  if(tab==='kalender') render();
+});
+/* Tastenkürzel wie bei Google: T heute, D/W/M Ansicht, N/P (J/K) blättern, C neuer Termin */
+document.addEventListener('keydown',e=>{
+  const a=document.activeElement;
+  if(tab!=='kalender'||$('evdlg').open||e.metaKey||e.ctrlKey||e.altKey||
+     (/^(INPUT|TEXTAREA|SELECT)$/.test(a?.tagName)&&!a.closest('dialog:not([open])'))||a?.isContentEditable) return;
+  const k={t:()=>calShift(0),d:()=>calGo('day'),w:()=>calGo('week'),m:()=>calGo('month'),
+    n:()=>calShift(1),j:()=>calShift(1),p:()=>calShift(-1),k:()=>calShift(-1),
+    c:()=>openEv('o',-1,{datum:isoDay(calDate)})}[e.key.toLowerCase()];
+  if(k){e.preventDefault();k()}
+});
+setInterval(()=>{const n=document.querySelector('#t-kalender .now');
+  if(n) n.style.top=nowMin()/60*HOUR+'px'},60000);
+
+/* ---------------------------------------------------------------- Gesamt */
+function rGesamt(){
+  sortProgramm();
+  const th=`<table class="sheet"><thead><tr><th>Thema</th><th>Format</th><th>Veranstaltungsform</th>
+    <th>Referent*innen</th></tr></thead><tbody>`+D.themen.map(t=>
+    `<tr><td style="width:32%"><span class="nm">${esc(t.thema)}</span><br>
+      <span style="color:var(--mute);font-size:12.5px">${linkText(t.beschreibung)}</span>${t.notiz?`<p style="white-space:pre-wrap"><strong>Notizen:</strong> ${linkText(t.notiz)}</p>`:''}</td>
+     <td style="width:15%;color:var(--mute)">${esc(t.formattyp)}</td>
+     <td style="width:18%;color:var(--mute)">${t.veranstaltungsformen.map(esc).join('<br>')}</td>
+     <td>${t.personen.map(n=>esc(n)+(isX(n)?' <span style="color:var(--faint);font-size:11px">extern</span>':'')).join('<br>')}</td></tr>`
+    ).join('')+`</tbody></table>`;
+  const pe=[...new Set(D.personen.map(p=>p.gruppe))].map(g=>
+    `<div class="grouphead">${esc(g)}</div><table class="sheet"><tbody>`+
+    D.personen.filter(p=>p.gruppe===g).map(p=>
+     `<tr><td style="width:24%"><span class="nm">${esc(p.name)}</span>${
+      p.extern?'<br><span style="color:var(--faint);font-size:11px">extern</span>':''}</td>
+      <td>${linkText(p.beschreibung)}</td></tr>`).join('')+`</tbody></table>`).join('');
+  const tbl=(arr,extra)=>`<table class="sheet"><tbody>`+arr.map(r=>
+    `<tr><td style="width:27%"><span class="nm">${esc(r.name)}</span></td>
+     <td>${linkText(r.beschreibung)||'—'}</td>${extra?extra(r):''}</tr>`).join('')+`</tbody></table>`;
+  const pr=D.programm.length?`<table class="sheet"><thead><tr><th>#</th><th>Termin</th><th>Thema</th>
+    <th>Form</th><th>Referent*innen</th><th>Zielgruppen</th><th>Notiz</th></tr></thead><tbody>`+
+    D.programm.map((p,i)=>`<tr><td>${i+1}</td><td>${esc(p.datum)||'—'}${p.zeit?' '+esc(p.zeit)+(p.ende?'–'+esc(p.ende):''):''}</td>
+     <td><span class="nm">${esc(p.thema)}</span></td><td>${esc(p.veranstaltungsform)}</td>
+     <td>${p.personen.map(esc).join(', ')}</td><td>${p.zielgruppen.map(esc).join(', ')}</td>
+     <td>${linkText(p.notiz)}</td></tr>`).join('')+`</tbody></table>`
+    :`<p class="note">Noch kein Programm zusammengestellt.</p>`;
+  const te=D.termine.length?`<h2>Weitere Termine</h2><table class="sheet"><thead><tr><th>Termin</th>
+    <th>Titel</th><th>Ort</th><th>Notiz</th></tr></thead><tbody>`+
+    [...D.termine].sort((a,b)=>((a.datum||'~')+(a.zeit||'')).localeCompare((b.datum||'~')+(b.zeit||'')))
+    .map(t=>`<tr><td style="white-space:nowrap">${esc(t.datum)||'—'}${t.zeit?' '+esc(t.zeit)+(t.ende?'–'+esc(t.ende):''):''}</td>
+     <td><span class="nm">${esc(t.titel)}</span></td><td>${esc(t.ort)}</td>
+     <td>${linkText(t.notiz)}</td></tr>`).join('')+`</tbody></table>`:'';
+  $('t-gesamt').innerHTML=`<div class="bar"><button class="link" onclick="window.print()">
+    Drucken / als PDF sichern</button></div><div class="doc">
+    <h2>Programm</h2>${pr}${te}<h2>Themen</h2>${th}<h2>Personen</h2>${pe}
+    <h2>Veranstaltungsformen</h2>${tbl(D.veranstaltungsformen,
+      r=>`<td style="width:70px;color:var(--faint);font-size:11.5px">${topicsFmt(r.name).length} Themen</td>`)}
+    <h2>Teilnehmende</h2>${tbl(D.teilnehmende)}
+    <h2>Formate</h2>${tbl(D.formattypen)}</div>`;
+}
+
+/* ---------------------------------------------------------------- speichern */
+let fileHandle=null, dirty=false, saveTimer=null, lastSave=null, saving=false, blocked=false;
+const canWrite = typeof window.showSaveFilePicker === 'function';
+const FILENAME = (location.pathname.split('/').pop()||'Origen-Programm-Mindmap.html')
+                 .replace(/%20/g,' ') || 'Origen-Programm-Mindmap.html';
+
+/* Die eigene Seite mit den aktuellen Daten neu zusammensetzen. */
+function selfHTML(){
+  sortProgramm();
+  const json = JSON.stringify(D).replace(/</g,'\\u003c');
+  return SELF.replace(/(<script id="seed" type="application\/json">)[\s\S]*?(<\/script>)/,
+    (m,a,b)=>a+json+b);
+}
+function payload(name){
+  sortProgramm();
+  return /\.json$/i.test(name||'') ? JSON.stringify(D,null,1) : selfHTML();
+}
+function markDirty(){
+  dirty=true;
+  if(fileHandle){clearTimeout(saveTimer);saveTimer=setTimeout(writeFile,600)}
+  updateStatus();
+}
+async function writeFile(){
+  if(!fileHandle) return;
+  try{
+    saving=true;updateStatus();
+    const w=await fileHandle.createWritable();
+    await w.write(payload(fileHandle.name));
+    await w.close();
+    dirty=false;lastSave=new Date();
+  }catch(e){
+    saving=false;
+    if(e.name==='NotAllowedError'){fileHandle=null;alert('Der Browser hat den Schreibzugriff '
+      +'zurückgezogen. Bitte noch einmal «Speichern» und die Datei wählen.')}
+    else alert('Speichern fehlgeschlagen: '+e.message);
+  }
+  saving=false;updateStatus();
+}
+async function saveFile(){
+  if(fileHandle){await writeFile();return}
+  if(canWrite&&!blocked){
+    try{
+      fileHandle=await window.showSaveFilePicker({suggestedName:FILENAME,
+        types:[{description:'Webseite',accept:{'text/html':['.html']}},
+               {description:'Nur Daten',accept:{'application/json':['.json']}}]});
+      await writeFile();render();return;
+    }catch(e){
+      if(e.name==='AbortError') return;
+      blocked=true;   /* z.B. wenn Chrome den Zugriff von file:// verweigert */
+    }
+  }
+  downloadHTML();
+}
+function downloadHTML(){
+  const b=new Blob([selfHTML()],{type:'text/html'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(b);a.download=FILENAME;a.click();
+  dirty=false;lastSave=new Date();updateStatus();
+  setTimeout(()=>alert('Die Datei liegt jetzt in deinen Downloads – ersetze damit die alte Datei '
+    +'in deinem Ordner. (Safari und Firefox dürfen aus Sicherheitsgründen nicht direkt in eine '
+    +'Datei schreiben; in Chrome geht das.)'),150);
+}
+function readData(txt){
+  const m=txt.match(/<script id="seed" type="application\/json">([\s\S]*?)<\/script>/);
+  return JSON.parse(m?m[1]:txt);
+}
+async function loadFile(){
+  if(typeof window.showOpenFilePicker==='function'&&!blocked){
+    try{
+      const [h]=await window.showOpenFilePicker({types:[{description:'HTML oder JSON',
+        accept:{'text/html':['.html'],'application/json':['.json']}}]});
+      const loaded=readData(await (await h.getFile()).text());
+      clearTimeout(saveTimer);D=loaded;
+      fileHandle=h;dirty=false;lastSave=new Date();editing=null;draft=null;render();return;
+    }catch(e){if(e.name==='AbortError')return; blocked=true}
+  }
+  $('imp').click();
+}
+function updateStatus(){
+  const s=$('status'), b=$('linkbtn'); if(!s) return;
+  const t=lastSave?lastSave.toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'}):'';
+  if(fileHandle){
+    s.className='status';
+    s.textContent = saving?'speichert …' : dirty?'…' : 'gespeichert '+t;
+    s.title='Schreibt direkt in '+fileHandle.name;
+  } else {
+    s.className='status'+(dirty?' warn':'');
+    s.textContent = dirty?'ungesichert':'';
+    s.title='';
+  }
+  b.textContent='Speichern';
+}
+window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
+document.addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key==='s'){e.preventDefault();saveFile()}
+});
+
+function importJSON(inp){
+  if(!inp.files[0])return;
+  const r=new FileReader();
+  r.onload=()=>{try{const loaded=readData(r.result);clearTimeout(saveTimer);fileHandle=null;D=loaded;dirty=false;editing=null;draft=null;render()}
+    catch(e){alert('Datei nicht lesbar: '+e.message)}};
+  r.readAsText(inp.files[0]);
+}
+function exportCSV(){
+  sortProgramm();
+  const q=s=>'"'+String(s??'').replace(/"/g,'""')+'"';
+  const rows=[['Nr','Termin','Zeit','Bis','Thema','Veranstaltungsform','Format','Referent*innen','Extern','Zielgruppen','Notiz']];
+  D.programm.forEach((p,i)=>{const t=D.themen.find(t=>t.thema===p.thema);
+    rows.push([i+1,p.datum,p.zeit,p.ende,p.thema,p.veranstaltungsform,t?t.formattyp:'',p.personen.join('; '),
+      p.personen.filter(isX).join('; '),p.zielgruppen.join('; '),p.notiz])});
+  const b=new Blob(['﻿'+rows.map(r=>r.map(q).join(',')).join('\n')],{type:'text/csv'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);
+  a.download='origen-programm.csv';a.click();
+}
+$('q').addEventListener('input',e=>{f.q=norm(e.target.value);render()});
+render();
+</script></body></html>
